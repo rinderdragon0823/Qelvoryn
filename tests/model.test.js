@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {
   createProject, createTrack, createClip, createEffect, createAsset, normalizeProject,
   findTrack, findClip, clipEnd, clipSourceSpan, maxDurationForClip, projectDuration,
-  canTrackAcceptClip, tracksAcceptingKind, TRACK_KINDS,
+  canTrackAcceptClip, TRACK_KINDS,
 } from '../src/core/model.js';
 import { secondsToTicks } from '../src/core/time.js';
 
@@ -38,29 +38,19 @@ test('effect clips get a camera transform by default', () => {
   assert.equal(clip.effects[0].type, 'cameraTransform');
 });
 
-test('track kind acceptance matches the track definitions', () => {
+test('tracks are universal layers: every kind accepts every clip type', () => {
   const video = createTrack('video');
   const audio = createTrack('audio');
   const text = createTrack('text');
   const effect = createTrack('effect');
-  assert.ok(canTrackAcceptClip(video, 'video'));
-  assert.ok(canTrackAcceptClip(video, 'image'));
-  assert.ok(!canTrackAcceptClip(video, 'audio'));
-  assert.ok(canTrackAcceptClip(audio, 'audio'));
-  assert.ok(!canTrackAcceptClip(audio, 'video'));
-  assert.ok(canTrackAcceptClip(text, 'text'));
-  assert.ok(canTrackAcceptClip(effect, 'effect'));
-  assert.ok(!canTrackAcceptClip(effect, 'video'));
-  for (const def of Object.values(TRACK_KINDS)) assert.ok(Array.isArray(def.accepts));
-});
-
-test('tracksAcceptingKind prefers the primary kind', () => {
-  const project = createProject();
-  project.tracks.push(createTrack('overlay', { name: 'O' }));
-  project.tracks.push(createTrack('audio', { name: 'A' }));
-  const audioTrack = project.tracks[1];
-  const list = tracksAcceptingKind(project, 'audio');
-  assert.equal(list[0].id, audioTrack.id);
+  for (const track of [video, audio, text, effect]) {
+    for (const clipType of ['video', 'image', 'text', 'shape', 'audio', 'effect']) {
+      assert.ok(canTrackAcceptClip(track, clipType), `${track.kind} accepts ${clipType}`);
+    }
+  }
+  assert.ok(!canTrackAcceptClip(null, 'video'));
+  assert.ok(!canTrackAcceptClip({ kind: 'bogus' }, 'video'));
+  for (const def of Object.values(TRACK_KINDS)) assert.ok(typeof def.label === 'string');
 });
 
 test('lookups and geometry helpers', () => {

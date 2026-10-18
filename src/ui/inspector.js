@@ -1110,7 +1110,7 @@ export class Inspector {
     append(shortcuts.body, el('div.hint', {
       html: [
         '<b>Space</b> 再生/停止 · <b>←/→</b> 1フレーム · <b>Shift+←/→</b> 1秒',
-        '<b>Home/End</b> 先頭/末尾 · <b>K</b> 分割 · <b>T</b> 全分割 · <b>Del</b> 削除',
+        '<b>Home/End</b> 先頭/末尾 · <b>K</b> 分割 · <b>T</b> 全分割 · <b>Del</b> 削除 · <b>Enter</b> 字幕編集',
         '<b>Ctrl+Z / Ctrl+Shift+Z</b> 元に戻す/やり直し · <b>Ctrl+D</b> 複製',
         '<b>Ctrl+A</b> 全選択 · <b>S</b> スナップ切替 · <b>+/-</b> ズーム · <b>M</b> マーカー',
         '<b>I / O</b> ワークエリア開始/終了 · <b>Ctrl+S</b> 保存 · <b>Ctrl+E</b> 書き出し',

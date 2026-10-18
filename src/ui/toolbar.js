@@ -54,7 +54,8 @@ export class Toolbar {
     const del = iconButton('trash', { title: '選択を削除 (Delete)', onclick: () => this.app.deleteSelection() });
     const dup = iconButton('copy', { title: '選択を複製 (Ctrl+D)', onclick: () => this.app.duplicateSelection() });
     const marker = iconButton('key', { title: 'マーカーを追加 (M)', onclick: () => this.app.addMarkerAt() });
-    return el('div', { style: { display: 'flex', gap: '4px', alignItems: 'center' } }, [this.undoBtn, this.redoBtn, split, del, dup, marker]);
+    const subtitle = iconButton('text', { title: '再生ヘッドに字幕を追加', onclick: () => this.app.addSubtitleAtPlayhead() });
+    return el('div', { style: { display: 'flex', gap: '4px', alignItems: 'center' } }, [this.undoBtn, this.redoBtn, split, del, dup, marker, subtitle]);
   }
 
   buildViewGroup() {

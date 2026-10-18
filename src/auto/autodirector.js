@@ -12,7 +12,7 @@
  */
 
 import { addTrack, insertClip } from '../core/commands.js';
-import { createClip, createEffect } from '../core/model.js';
+import { createClip, createEffect, subtitleTextStyle } from '../core/model.js';
 import { addKeyframe } from '../core/keyframes.js';
 import { TICKS_PER_SECOND, secondsToTicks, formatTimecode } from '../core/time.js';
 import { sourceSecondsAt } from '../engine/compositor.js';
@@ -387,19 +387,9 @@ export class AutoDirector {
           name: cue.text.slice(0, 18) || '字幕',
           startTicks: t0,
           durationTicks: t1 - t0,
-          text: {
-            content: cue.text,
+          text: subtitleTextStyle(cue.text, {
             fontSize: opts.subtitleFontSize ?? AUTO_OPTIONS.subtitleFontSize,
-            fontWeight: 700,
-            color: '#ffffff',
-            strokeColor: '#000000',
-            strokeWidth: 0.005,
-            valign: 'middle',
-            align: 'center',
-            maxWidth: 0.86,
-            shadow: { enabled: true, x: 0, y: 2, blur: 6, color: '#000000', alpha: 0.7 },
-            background: { enabled: false, color: '#000000', alpha: 0.5, padding: 0.4, radius: 0.15 },
-          },
+          }),
           transform: { x: 0.5, y: 0.86 },
           metadata: { auto: AUTO_META.subtitle, cueStartMs: cue.startMs, cueEndMs: cue.endMs },
         });

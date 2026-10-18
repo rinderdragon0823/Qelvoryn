@@ -34,12 +34,12 @@ export function uid(prefix = 'id') {
 // ---------------------------------------------------------------------------
 
 export const TRACK_KINDS = {
-  video: { label: '動画', accepts: ['video', 'image', 'shape'], visual: true, icon: 'V' },
-  image: { label: '画像', accepts: ['image', 'video', 'shape'], visual: true, icon: 'I' },
-  text: { label: 'テキスト', accepts: ['text', 'shape'], visual: true, icon: 'T' },
-  audio: { label: '音声', accepts: ['audio'], visual: false, icon: 'A' },
-  overlay: { label: 'オーバーレイ', accepts: ['video', 'image', 'text', 'shape', 'audio'], visual: true, icon: 'O' },
-  effect: { label: 'エフェクト', accepts: ['effect'], visual: true, icon: 'F' },
+  video: { label: 'レイヤー', visual: true, icon: 'V' },
+  image: { label: '画像', visual: true, icon: 'I' },
+  text: { label: 'テキスト', visual: true, icon: 'T' },
+  audio: { label: '音声', visual: false, icon: 'A' },
+  overlay: { label: 'オーバーレイ', visual: true, icon: 'O' },
+  effect: { label: 'エフェクト', visual: true, icon: 'F' },
 };
 
 export const TRACK_KIND_ORDER = ['video', 'image', 'text', 'audio', 'overlay', 'effect'];
@@ -321,22 +321,29 @@ export function projectDuration(project) {
 }
 
 export function canTrackAcceptClip(track, clipType) {
-  const def = TRACK_KINDS[track.kind];
-  if (!def) return false;
-  return def.accepts.includes(clipType);
+  // YMM4-style layers: every track accepts every clip type (video, audio,
+  // text, shapes and effects all live on the same layer stack).
+  return Boolean(track) && Boolean(TRACK_KINDS[track.kind]);
 }
 
-export function tracksAcceptingKind(project, clipType) {
-  const primary = {
-    video: 'video',
-    image: 'image',
-    text: 'text',
-    audio: 'audio',
-    shape: 'overlay',
-    effect: 'effect',
-  }[clipType];
-  return project.tracks.filter((t) => canTrackAcceptClip(t, clipType) && t.kind === primary)
-    .concat(project.tracks.filter((t) => canTrackAcceptClip(t, clipType) && t.kind !== primary));
+/**
+ * Shared subtitle text style - used by the manual "字幕" button and by the
+ * auto director so both produce identical captions.
+ */
+export function subtitleTextStyle(content = '字幕テキスト', opts = {}) {
+  return {
+    content,
+    fontSize: opts.fontSize ?? 0.062,
+    fontWeight: 700,
+    color: '#ffffff',
+    strokeColor: '#000000',
+    strokeWidth: 0.005,
+    valign: 'middle',
+    align: 'center',
+    maxWidth: 0.86,
+    shadow: { enabled: true, x: 0, y: 2, blur: 6, color: '#000000', alpha: 0.7 },
+    background: { enabled: false, color: '#000000', alpha: 0.5, padding: 0.4, radius: 0.15 },
+  };
 }
 
 // ---------------------------------------------------------------------------

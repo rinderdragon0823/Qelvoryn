@@ -35,9 +35,14 @@ test('insertClip places a clip and resolves overlap by default', () => {
   assert.equal(second.trackId, v1.id);
 });
 
-test('insertClip rejects clips the track cannot hold', () => {
+test('tracks are universal: video, audio and text all share one layer stack', () => {
   const { store, audio } = setup();
-  assert.throws(() => insertClip(store, audio.id, createClip('video', {})), /配置できません/);
+  const clip = createClip('video', { startTicks: 0, durationTicks: 1000 });
+  const inserted = insertClip(store, audio.id, clip, { resolveOverlap: false });
+  assert.ok(inserted, 'a video clip fits on any layer');
+  const textClip = insertClip(store, audio.id, createClip('text', { startTicks: 2000, durationTicks: 1000 }), { resolveOverlap: false });
+  assert.ok(textClip, 'a text clip fits on the same layer');
+  assert.equal(insertClip(store, 'nope', createClip('video', {})), null, 'unknown layer returns null');
 });
 
 test('findFreeSlot and clampStartOnTrack respect neighbours', () => {
@@ -61,27 +66,32 @@ test('trackRangeFree respects boundaries', () => {
   assert.equal(trackRangeFree(v1, 2000, 100), false, 'starting inside the clip is not free');
 });
 
-test('findTrackForClip spills to the next free track, or reports a new track is needed', () => {
+test('findTrackForClip spills to the next free layer, or reports a new layer is needed', () => {
   const { store, v1, v2, audio } = setup();
   insertClip(store, v1.id, createClip('video', { startTicks: 0, durationTicks: 4000 }), { resolveOverlap: false });
 
   const preferred = findTrackForClip(store.state, 'video', {
     ticks: 0, durationTicks: 1000, preferredIndex: store.state.tracks.indexOf(v1),
   });
-  assert.equal(preferred, v2, 'busy preferred lane spills to the free video track');
+  assert.equal(preferred, v2, 'busy preferred layer spills to the next free layer');
 
   insertClip(store, v2.id, createClip('video', { startTicks: 0, durationTicks: 4000 }), { resolveOverlap: false });
+  insertClip(store, audio.id, createClip('audio', { startTicks: 0, durationTicks: 4000 }), { resolveOverlap: false });
   assert.equal(
     findTrackForClip(store.state, 'video', { ticks: 0, durationTicks: 4000 }),
     null,
-    'all video tracks busy at that spot -> null lets the caller create a new track',
+    'all layers busy at that spot -> null lets the caller create a new layer',
   );
   assert.equal(
     findTrackForClip(store.state, 'video', { ticks: 8000, durationTicks: 1000 }),
     v1,
-    'free spot on the first video track',
+    'free spot on the first layer in the stack',
   );
-  assert.equal(findTrackForClip(store.state, 'audio', { ticks: 0, durationTicks: 1000 }), audio);
+  assert.equal(
+    findTrackForClip(store.state, 'audio', { ticks: 8000, durationTicks: 1000 }),
+    v1,
+    'audio clips use the same layer stack (no audio-only tracks)',
+  );
 });
 
 test('duplicateTrack clones the track and its clips with new ids', () => {
@@ -113,7 +123,7 @@ test('computeMoveConstraints keeps a group between its neighbours', () => {
   assert.equal(maxDelta, 2000, 'cannot pass the right clip (starts at 5000)');
 });
 
-test('applyMove moves clips in time and across tracks when compatible', () => {
+test('applyMove moves clips in time and across layers (any layer is valid)', () => {
   const { store, v1, v2, audio } = setup();
   const clip = add(store, v1, createClip('video', { startTicks: 1000, durationTicks: 1000 }));
   applyMove(store, [{ clipId: clip.id, trackId: v1.id }], 500);
@@ -125,7 +135,7 @@ test('applyMove moves clips in time and across tracks when compatible', () => {
   assert.equal(moved.clip.trackId, v2.id);
 
   applyMove(store, [{ clipId: clip.id, trackId: audio.id }], 0);
-  assert.equal(findClip(store.state, clip.id).track.id, v2.id, 'incompatible destination is ignored');
+  assert.equal(findClip(store.state, clip.id).track.id, audio.id, 'a video clip can move to any layer');
 });
 
 test('moveSelectionTo anchors the left-most clip', () => {

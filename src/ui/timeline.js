@@ -170,18 +170,10 @@ export class TimelineView {
       el('div.spacer', { style: { flex: '1 1 auto' } }),
       button('トラック追加', {
         icon: 'plus',
-        title: 'トラックを追加',
-        onclick: (ev) => this.showAddTrackMenu(ev.currentTarget),
+        title: 'レイヤーを追加',
+        onclick: () => this.app.addLayer(),
       }),
     ]);
-  }
-
-  showAddTrackMenu(anchor) {
-    const items = Object.entries(TRACK_KINDS).map(([kind, def]) => ({
-      label: `${def.label}トラック`,
-      action: () => addTrack(this.store, kind),
-    }));
-    contextMenu(anchor, items);
   }
 
   bindEvents() {
@@ -663,13 +655,12 @@ export class TimelineView {
     if (!clipNode) return;
     const clip = this.store.clipRef(clipNode.dataset.clipId);
     if (!clip) return;
-    const track = this.store.state.tracks.find((t) => t.id === clip.trackId);
-    if (track && (track.kind === 'text' || clip.type === 'text')) {
-      this.app.focusInspectorText(clip.id);
-    } else {
-      this.app.inspector.setActiveTab('clip');
-      this.app.inspector.scrollToSection('clip-time');
+    if (clip.type === 'text') {
+      this.app.editSubtitleClip(clip.id);
+      return;
     }
+    this.app.inspector.setActiveTab('clip');
+    this.app.inspector.scrollToSection('clip-time');
   }
 
   beginClipDrag(ev, anchorClip) {

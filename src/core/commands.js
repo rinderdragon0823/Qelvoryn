@@ -8,7 +8,7 @@
  */
 
 import {
-  uid, createTrack, canTrackAcceptClip, tracksAcceptingKind, clipEnd, TRACK_KINDS, createEffect,
+  uid, createTrack, canTrackAcceptClip, clipEnd, TRACK_KINDS, createEffect,
 } from './model.js';
 import {
   addKeyframe, removeKeyframe, moveKeyframe, setKeyframeInterp, clearKeyframes,
@@ -181,16 +181,17 @@ export function trackRangeFree(track, start, duration, ignoreIds = new Set()) {
 
 /**
  * Choose the track that should receive a new clip (multi-track spill UX):
- * the preferred track when it accepts the type and is free at that spot,
- * then the first free track of the primary kind, then any free compatible
- * track.  Returns null when a new track must be created.
+ * the preferred layer when it is free at that spot, otherwise the first
+ * free layer in the stack.  Returns null when a new layer must be created.
  */
 export function findTrackForClip(project, clipType, { ticks = 0, durationTicks = 0, preferredIndex = -1 } = {}) {
   const tracks = project.tracks;
   const preferred = preferredIndex >= 0 ? tracks[preferredIndex] : null;
-  const free = (track) => Boolean(track) && trackRangeFree(track, ticks, durationTicks);
-  if (preferred && canTrackAcceptClip(preferred, clipType) && free(preferred)) return preferred;
-  return tracksAcceptingKind(project, clipType).find(free) || null;
+  const free = (track) => Boolean(track)
+    && canTrackAcceptClip(track, clipType)
+    && trackRangeFree(track, ticks, durationTicks);
+  if (free(preferred)) return preferred;
+  return tracks.find((t) => free(t)) || null;
 }
 
 // ---------------------------------------------------------------------------
@@ -581,7 +582,7 @@ export function deleteTrack(store, trackId, opts = {}) {
   store.transact(opts.label || 'トラックを削除', () => {
     store.touch(['tracks']);
     store.state.tracks.splice(index, 1);
-    if (!store.state.tracks.length) store.state.tracks.push(createTrack('video', { name: '動画 1' }));
+    if (!store.state.tracks.length) store.state.tracks.push(createTrack('video', { name: 'レイヤー 1' }));
   });
 }
 

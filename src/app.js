@@ -9,7 +9,7 @@
 
 import { ProjectStore, deepClone } from './core/store.js';
 import {
-  createProject, createTrack, createClip, uid, projectDuration, TRACK_KINDS, DEFAULT_CLIP_SECONDS,
+  createProject, createTrack, createClip, uid, projectDuration, subtitleTextStyle, DEFAULT_CLIP_SECONDS,
 } from './core/model.js';
 import { TICKS_PER_SECOND, secondsToTicks, snapTicksToFrame, ticksToSeconds, formatTimecode, formatDuration } from './core/time.js';
 import * as cmd from './core/commands.js';
@@ -46,8 +46,7 @@ export class QelvorynApp {
     this._refreshQueued = false;
 
     const project = createProject({ name: '無題のプロジェクト' });
-    project.tracks.push(createTrack('video', { name: '動画 1' }));
-    project.tracks.push(createTrack('audio', { name: '音声 1' }));
+    project.tracks.push(createTrack('video', { name: 'レイヤー 1' }));
     this.store = new ProjectStore(project);
 
     this.mediaPool = new MediaPool(this.store);
@@ -296,6 +295,17 @@ export class QelvorynApp {
           ev.preventDefault();
           this.setPlayhead(this.projectDuration());
           break;
+        case 'Enter': {
+          const ids = this.session.selection;
+          if (ids.length === 1) {
+            const found = this.store.findClip(ids[0]);
+            if (found && found.clip.type === 'text') {
+              ev.preventDefault();
+              this.editSubtitleClip(ids[0]);
+            }
+          }
+          break;
+        }
         case 'Delete':
         case 'Backspace':
           ev.preventDefault();
@@ -766,36 +776,22 @@ export class QelvorynApp {
     });
   }
 
-  /** Track kind used when a new track must be created for a clip type. */
-  trackKindForClip(clipType) {
-    if (clipType === 'audio') return 'audio';
-    if (clipType === 'text') return 'text';
-    if (clipType === 'image') return 'image';
-    if (clipType === 'effect') return 'effect';
-    return 'video';
-  }
-
   /**
-   * Create a track that can hold `clipType`.
-   * Visual tracks appear right above `nearIndex` (top when negative),
-   * audio tracks right below it (bottom when negative).
+   * Add a new editing layer above the stack (YMM4-style: layers hold any
+   * clip type, there is no video/audio track split).
    */
-  createTrackForClip(clipType, nearIndex = -1) {
-    const kind = this.trackKindForClip(clipType);
-    const def = TRACK_KINDS[kind];
-    const count = this.store.state.tracks.filter((t) => t.kind === kind).length + 1;
+  addLayer(nearIndex = -1) {
     const tracks = this.store.state.tracks;
-    let index;
-    if (nearIndex >= 0 && nearIndex < tracks.length) index = kind === 'audio' ? nearIndex + 1 : nearIndex;
-    else index = kind === 'audio' ? tracks.length : 0;
-    return cmd.addTrack(this.store, kind, { name: `${def.label} ${count}`, index });
+    const n = tracks.length + 1;
+    const index = nearIndex >= 0 && nearIndex < tracks.length ? nearIndex : 0;
+    return cmd.addTrack(this.store, 'video', { name: `レイヤー ${n}`, index, label: 'レイヤーを追加' });
   }
 
   /**
    * Drop an asset on the timeline (Premiere/YMM4 style):
    * the preferred lane wins when it is free, otherwise the first free
-   * compatible track is used, and a new track is created when everything
-   * at that spot is busy.
+   * layer is used, and a new layer is created when everything at that
+   * spot is busy.
    * @param {string} assetId
    * @param {{trackIndex?:number, ticks?:number}} [opts]
    */
@@ -815,7 +811,7 @@ export class QelvorynApp {
         preferredIndex,
       });
       if (!track) {
-        track = this.createTrackForClip(clip.type, preferredIndex);
+        track = this.addLayer(preferredIndex);
         created = true;
       }
       inserted = cmd.insertClip(this.store, track.id, clip, {
@@ -827,7 +823,7 @@ export class QelvorynApp {
       this.selectClips([inserted.id]);
       this.timeline.scrollToTicks(inserted.startTicks);
       this.setStatus(created
-        ? `「${asset.name}」を新しいトラック「${track.name}」に配置しました`
+        ? `「${asset.name}」を新しいレイヤー「${track.name}」に配置しました`
         : `「${asset.name}」を「${track.name}」に配置しました`);
     }
     return inserted;
@@ -840,12 +836,58 @@ export class QelvorynApp {
   insertAssetOnNewTrack(assetId) {
     const asset = this.store.state.assets[assetId];
     if (!asset) return null;
-    const clip = this.clipFromAsset(asset, this.session.playheadTicks);
-    const track = this.createTrackForClip(clip.type, -1);
+    const track = this.addLayer();
     return this.addAssetToTimeline(assetId, {
       trackIndex: this.store.state.tracks.indexOf(track),
       ticks: this.session.playheadTicks,
     });
+  }
+
+  /** Add a subtitle text clip at the playhead and edit its text. */
+  async addSubtitleAtPlayhead() {
+    const start = this.session.playheadTicks;
+    const durationTicks = secondsToTicks(3);
+    let clip = null;
+    this.store.transact('字幕を追加', () => {
+      clip = createClip('text', {
+        name: '字幕',
+        startTicks: start,
+        durationTicks,
+        text: subtitleTextStyle('字幕テキスト'),
+        transform: { x: 0.5, y: 0.86 },
+      });
+      let track = cmd.findTrackForClip(this.store.state, 'text', { ticks: start, durationTicks });
+      if (!track) track = this.addLayer(-1);
+      cmd.insertClip(this.store, track.id, clip, { resolveOverlap: false, label: '字幕を追加' });
+    });
+    if (!clip) return null;
+    this.selectClips([clip.id]);
+    this.timeline.scrollToTicks(clip.startTicks);
+    const text = await promptDialog('字幕テキスト', { title: '字幕を編集', value: clip.text.content });
+    if (text != null && text.trim()) this.applySubtitleText(clip.id, text.trim());
+    else this.setStatus('字幕を追加しました（Enter でテキスト編集）', 'ok');
+    return clip;
+  }
+
+  /** Edit the text of a subtitle / text clip. */
+  async editSubtitleClip(clipId) {
+    const found = this.store.findClip(clipId);
+    if (!found || found.clip.type !== 'text') return;
+    const text = await promptDialog('字幕テキスト', { title: '字幕を編集', value: found.clip.text.content });
+    if (text != null && text.trim()) this.applySubtitleText(clipId, text.trim());
+  }
+
+  applySubtitleText(clipId, text) {
+    const found = this.store.findClip(clipId);
+    if (!found) return;
+    this.store.transact('字幕テキストを変更', () => {
+      this.store.touch(['tracks', found.trackIndex, 'clips', found.clipIndex, 'text']);
+      found.clip.text.content = text;
+      if (!found.clip.name || found.clip.name === '字幕' || found.clip.name === '字幕テキスト') {
+        found.clip.name = text.slice(0, 18);
+      }
+    });
+    this.setStatus('字幕を更新しました', 'ok');
   }
 
   async relinkAssets(files) {
@@ -1005,8 +1047,7 @@ export class QelvorynApp {
   newProject() {
     this.confirm('新しいプロジェクトを作成しますか？（現在の内容は自動保存に残ります）', () => {
       const project = createProject({ name: '無題のプロジェクト' });
-      project.tracks.push(createTrack('video', { name: '動画 1' }));
-      project.tracks.push(createTrack('audio', { name: '音声 1' }));
+      project.tracks.push(createTrack('video', { name: 'レイヤー 1' }));
       this.playback.stop({ silent: true });
       this.store.load(project, { label: '新規プロジェクト' });
       this.session.selection = [];
