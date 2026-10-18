@@ -1,0 +1,10 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "qelvoryn": {
+      "type": "local",
+      "command": ["node", "tools/mcp-server.mjs"],
+      "enabled": true
+    }
+  }
+}

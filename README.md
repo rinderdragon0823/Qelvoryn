@@ -47,6 +47,56 @@ npm run serve  # 静的サーバ (http://localhost:5173)
 
 ブラウザ統合テストは `tests.html` を開くと実行されます (canvas 合成・WebAudio デコード・IndexedDB 保存・MediaRecorder 書き出しを実ブラウザ API で検証)。
 
+## AI 連携 (MCP)
+
+`tools/mcp-server.mjs` は Qelvoryn の編集コアを **MCP (Model Context Protocol) ツール**として公開する依存ゼロの stdio サーバーです。AI アシスタントからプロジェクトファイルを直接開き、レイヤー・テキスト/字幕・キーフレーム・カメラズーム・トリム・分割などを操作して保存できます。アプリとまったく同じエンジン (`src/core`) を使うため、編集結果はブラウザで開けばそのまま続きを編集できます。
+
+### opencode
+
+リポジトリ同梱の `opencode.json` に設定済みです。このリポジトリで opencode を再起動すればそのまま使えます。
+
+```json
+{
+  "mcp": {
+    "qelvoryn": {
+      "type": "local",
+      "command": ["node", "tools/mcp-server.mjs"],
+      "enabled": true
+    }
+  }
+}
+```
+
+### Claude Desktop など
+
+`claude_desktop_config.json` の `mcpServers` に追加します:
+
+```json
+{
+  "mcpServers": {
+    "qelvoryn": {
+      "command": "node",
+      "args": ["C:/path/to/Qelvoryn/tools/mcp-server.mjs"]
+    }
+  }
+}
+```
+
+### 主なツール
+
+| カテゴリ | ツール |
+| --- | --- |
+| プロジェクト | `qelvoryn_open_project` / `qelvoryn_save_project` / `qelvoryn_project_summary` / `qelvoryn_set_project` |
+| レイヤー | `qelvoryn_list_tracks` / `qelvoryn_add_layer` |
+| クリップ | `qelvoryn_list_clips` / `qelvoryn_get_clip` / `qelvoryn_split_clip` / `qelvoryn_trim_clip` / `qelvoryn_set_clip_timing` / `qelvoryn_delete_clips` / `qelvoryn_duplicate_clips` |
+| テキスト・字幕 | `qelvoryn_add_text` / `qelvoryn_add_subtitles` (SRT / VTT / TXT ファイル対応) |
+| アニメーション・演出 | `qelvoryn_add_camera_zoom` / `qelvoryn_add_keyframe` / `qelvoryn_set_clip_prop` |
+| その他 | `qelvoryn_add_marker` / `qelvoryn_set_work_area` / `qelvoryn_list_assets` |
+
+時間はすべて秒 (小数可) で指定します。例:
+
+> 「demo.qelvoryn.json を開いて、20 秒地点に 1.5 倍のカメラズームを 3 秒追加、SRT ファイルを字幕として読み込んで、保存して」
+
 ## デプロイ (GitHub Pages)
 
 1. リポジトリを GitHub に push すると `.github/workflows/pages.yml` がロジックテストを実行し、成功後にサイトを自動公開します。
@@ -73,6 +123,7 @@ styles/main.css     スタイル
 tests/              Node ロジックテスト
 tests.html          ブラウザ統合テスト
 tools/serve.mjs     開発用静的サーバ
+tools/mcp-server.mjs  AI 連携 (MCP) サーバー
 ```
 
 ## 書き出しの注意
