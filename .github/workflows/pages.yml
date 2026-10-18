@@ -39,7 +39,7 @@ jobs:
       - name: Prepare site
         run: |
           mkdir -p dist
-          cp -r index.html tests.html favicon.ico favicon.svg src styles tests tools dist/
+          cp -r index.html tests.html favicon.ico favicon.svg opencode.json src styles tests tools dist/
           cp .nojekyll dist/
           cp README.md dist/ 2>/dev/null || true
       - uses: actions/upload-pages-artifact@v3
