@@ -248,7 +248,12 @@ export function scheduleProjectAudio(ctx, { project, destination, mediaPool, fro
       if (!asset) continue;
       const buffer = mediaPool.getAudioBufferSync?.(clip.assetId) || mediaPool.audioBuffers.get(clip.assetId);
       if (!buffer) {
-        missing.push({ clipId: clip.id, assetId: clip.assetId, name: asset.name });
+        // Assets already known to be silent (no audio track / undecodable
+        // codec) are skipped without a warning; only unexpected gaps are
+        // reported so playback never spams the user.
+        if (asset.hasAudio !== false) {
+          missing.push({ clipId: clip.id, assetId: clip.assetId, name: asset.name });
+        }
         continue;
       }
       const startTicks = Math.max(clip.startTicks, fromTicks);
@@ -278,7 +283,11 @@ export function scheduleProjectAudio(ctx, { project, destination, mediaPool, fro
 export function pendingAudioAssets(project, mediaPool) {
   const pending = [];
   const seen = new Set();
+  const soloTracks = project.tracks.filter((t) => t.solo);
+  const anySolo = soloTracks.length > 0;
   for (const track of project.tracks) {
+    if (track.muted) continue;
+    if (anySolo && !track.solo) continue;
     for (const clip of track.clips) {
       if (!clip.assetId || seen.has(clip.assetId)) continue;
       if (clip.type === 'text' || clip.type === 'shape' || clip.type === 'effect') continue;

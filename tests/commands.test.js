@@ -182,6 +182,39 @@ test('trim right stops at the next clip', () => {
   assert.equal(findClip(store.state, a.id).clip.durationTicks, 20000);
 });
 
+test('dragging a trim edge is idempotent (restore from originals each frame)', () => {
+  // The timeline gesture re-derives every pointer move from the original
+  // geometry: restore, then apply the whole cumulative delta.  Simulate the
+  // frame sequence and check the result equals a single one-shot trim.
+  const { store, v1 } = setup();
+  const clip = createClip('video', { startTicks: 6000, durationTicks: 40000, inTicks: 20000 });
+  const asset = createAsset({ durationTicks: secondsToTicks(10) });
+  store.transact('asset', () => {
+    store.touch(['assets']);
+    store.state.assets[asset.id] = asset;
+  });
+  clip.assetId = asset.id;
+  add(store, v1, clip);
+
+  const original = { start: clip.startTicks, duration: clip.durationTicks, inTicks: clip.inTicks };
+  for (const cumulative of [100, 500, 2000, 6000, 9000]) {
+    clip.startTicks = original.start;
+    clip.durationTicks = original.duration;
+    clip.inTicks = original.inTicks;
+    trimClipEdge(store, clip.id, 'right', cumulative, {});
+    assert.equal(clip.durationTicks, original.duration + cumulative, `frame ${cumulative} follows the pointer`);
+  }
+  // Left edge: cumulative negative delta grows the clip left-wards.
+  for (const cumulative of [-100, -1500, -4000]) {
+    clip.startTicks = original.start;
+    clip.durationTicks = original.duration;
+    clip.inTicks = original.inTicks;
+    trimClipEdge(store, clip.id, 'left', cumulative, {});
+    assert.equal(clip.startTicks, original.start + cumulative, `left frame ${cumulative} follows the pointer`);
+    assert.equal(clip.durationTicks, original.duration - cumulative);
+  }
+});
+
 test('splitAt cuts clips and shifts keyframes into the right half', () => {
   const { store, v1 } = setup();
   const clip = createClip('video', { startTicks: 0, durationTicks: 80000, inTicks: 0 });

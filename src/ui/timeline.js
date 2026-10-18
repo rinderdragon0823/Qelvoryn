@@ -720,6 +720,8 @@ export class TimelineView {
       originalStart: clip.startTicks,
       originalDuration: clip.durationTicks,
       originalIn: clip.inTicks,
+      originalKeyframes: JSON.parse(JSON.stringify(clip.keyframes || {})),
+      originalFades: { inTicks: clip.fades?.inTicks || 0, outTicks: clip.fades?.outTicks || 0 },
       startTicksAtPointer: this.pointerTicks(ev),
       moved: false,
       tx,
@@ -906,30 +908,28 @@ export class TimelineView {
     const store = this.store;
     const found = store.findClip(g.clipId);
     if (!found) return;
-    g.appliedDelta = g.appliedDelta || 0;
-    // Restore the clip to its original geometry, then apply the whole delta.
+    // Re-derive the whole edit from the original geometry on every move so
+    // the trim always follows the pointer exactly (clamps included).
     found.clip.startTicks = g.originalStart;
     found.clip.durationTicks = g.originalDuration;
     found.clip.inTicks = g.originalIn;
+    found.clip.keyframes = JSON.parse(JSON.stringify(g.originalKeyframes));
+    if (found.clip.fades) {
+      found.clip.fades.inTicks = g.originalFades.inTicks;
+      found.clip.fades.outTicks = g.originalFades.outTicks;
+    }
     const rawDelta = this.pointerTicks(ev) - g.startTicksAtPointer;
-    let delta = this.session.snapEnabled && !ev.altKey
-      ? this.app.snapValue(g.edge === 'left' ? g.originalStart + rawDelta : g.originalStart + g.originalDuration + rawDelta, {
+    const edgePos = g.edge === 'left' ? g.originalStart : g.originalStart + g.originalDuration;
+    let delta = rawDelta;
+    if (this.session.snapEnabled && !ev.altKey) {
+      const snap = this.app.snapValue(edgePos + rawDelta, {
         excludeClipIds: [g.clipId],
         thresholdTicks: this.pxToTicks(8),
         disable: false,
-      }).ticks - (g.edge === 'left' ? g.originalStart : g.originalStart + g.originalDuration)
-      : rawDelta;
-    delta = delta - g.appliedDelta;
-    if (Math.abs(delta) >= 1) {
-      const before = JSON.stringify({
-        s: found.clip.startTicks, d: found.clip.durationTicks, i: found.clip.inTicks, k: found.clip.keyframes,
       });
-      trimClipEdge(store, g.clipId, g.edge, delta, { label: 'クリップをトリミング' });
-      const after = JSON.stringify({
-        s: found.clip.startTicks, d: found.clip.durationTicks, i: found.clip.inTicks, k: found.clip.keyframes,
-      });
-      if (before !== after) g.appliedDelta += delta;
+      delta = snap.ticks - edgePos;
     }
+    trimClipEdge(store, g.clipId, g.edge, delta, { label: 'クリップをトリミング' });
     store.notifyLive('trim');
     this.layoutClips();
   }

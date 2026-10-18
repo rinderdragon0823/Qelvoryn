@@ -73,6 +73,7 @@ export class PlaybackController extends Emitter {
     this.activeVideoKeys = new Set();
     this.volume = 1;
     this.reportMissing = true;
+    this.lastMissingWarning = '';
   }
 
   get audioContext() {
@@ -130,7 +131,12 @@ export class PlaybackController extends Emitter {
     const duration = Math.max(0, toTicks - fromTicks);
     if (duration <= 0) return false;
 
-    await this.primeVideos(project, fromTicks);
+    // Decode every referenced audio asset up front so playback is exact and
+    // assets that simply have no audio never trigger a warning.
+    await Promise.all([
+      this.primeVideos(project, fromTicks),
+      this.prepareAudio(project),
+    ]);
 
     const startTime = ctx.currentTime + 0.08;
     const { handles, missing } = scheduleProjectAudio(ctx, {
@@ -151,7 +157,10 @@ export class PlaybackController extends Emitter {
 
     if (missing.length && this.reportMissing) {
       const names = [...new Set(missing.map((m) => m.name))].join(', ');
-      this.emit('warning', { message: `音声を再生できません(デコード未対応): ${names}` });
+      if (names !== this.lastMissingWarning) {
+        this.lastMissingWarning = names;
+        this.emit('warning', { message: `音声を再生できません(デコード非対応): ${names}` });
+      }
     }
 
     this.emit('play', { fromTicks, toTicks });

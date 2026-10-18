@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import {
   computePeaks, peaksRange, envelopeForWidth, DEFAULT_PEAKS_PER_SECOND,
 } from '../src/media/waveform.js';
+import { createProject, createTrack, createClip, createAsset } from '../src/core/model.js';
+import { scheduleProjectAudio, pendingAudioAssets } from '../src/audio/audiograph.js';
 
 function fakeBuffer(channelData, sampleRate = 48000) {
   const channels = channelData.map((c) => (c instanceof Float32Array ? c : new Float32Array(c)));
@@ -92,4 +94,29 @@ test('DEFAULT_PEAKS_PER_SECOND is sane', () => {
   const peaks = computePeaks(buffer);
   assert.equal(peaks.peaksPerSecond, DEFAULT_PEAKS_PER_SECOND);
   assert.ok(peaks.min.length > 0);
+});
+
+test('scheduleProjectAudio stays quiet for silent assets, reports pending ones once each', () => {
+  const project = createProject({});
+  const track = createTrack('audio', { name: 'A1' });
+  project.tracks.push(track);
+  const silent = createAsset({ name: 'silent.mp3', kind: 'audio', hasAudio: false });
+  const pending = createAsset({ name: 'pending.mp3', kind: 'audio', hasAudio: true });
+  project.assets[silent.id] = silent;
+  project.assets[pending.id] = pending;
+  track.clips.push(createClip('audio', { assetId: silent.id, startTicks: 0, durationTicks: 1000 }));
+  track.clips.push(createClip('audio', { assetId: pending.id, startTicks: 2000, durationTicks: 1000 }));
+
+  const fakeCtx = { currentTime: 0 };
+  const mediaPool = { audioBuffers: new Map() };
+  const { handles, missing } = scheduleProjectAudio(fakeCtx, {
+    project, destination: {}, mediaPool, fromTicks: 0, toTicks: 4000,
+  });
+  assert.equal(handles.length, 0, 'nothing is scheduled without decoded buffers');
+  assert.equal(missing.length, 1, 'the undecoded-but-audible asset is reported');
+  assert.equal(missing[0].assetId, pending.id);
+  assert.ok(
+    !pendingAudioAssets(project, mediaPool).some((p) => p.assetId === silent.id),
+    'silent assets are never queued for decoding',
+  );
 });
