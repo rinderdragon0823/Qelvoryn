@@ -434,6 +434,34 @@ test('MediaRecorder 書き出しスタックが実フレームを記録する', 
   assert(size > 1000, `the recorder produced real data (${size} bytes, ${containers[0].mime})`);
 });
 
+test('インスペクタが全タブで例外なく描画される (トラック/クリップ選択)', async () => {
+  const { Inspector } = await import('../../src/ui/inspector.js');
+  const track = createTrack('video', { name: 'V1' });
+  const store = makeStore({ tracks: [track] });
+  const clip = redEllipseClip({});
+  insertClip(store, track.id, clip, { resolveOverlap: false });
+
+  const session = { selection: [], selectedTrackId: track.id, playheadTicks: 0 };
+  const app = {
+    store,
+    session,
+    mediaPool: { blobs: new Map() },
+    projectDuration: () => projectDuration(store.state),
+  };
+
+  const inspector = new Inspector(app);
+  assert(inspector.bodyEl.childElementCount > 0, 'トラック選択時のパネルが描画される');
+
+  session.selection = [clip.id];
+  inspector.render();
+  assert(inspector.bodyEl.childElementCount > 0, 'クリップ選択時のパネルが描画される');
+
+  for (const tab of ['effects', 'keyframes', 'project']) {
+    inspector.setActiveTab(tab);
+    assert(inspector.bodyEl.childElementCount > 0, `${tab} タブが描画される`);
+  }
+});
+
 test('スチル書き出しが合成済み PNG を生成する', async () => {
   const video = createTrack('video', { name: 'V1' });
   const store = makeStore({ tracks: [video] });

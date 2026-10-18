@@ -301,7 +301,7 @@ export class Inspector {
         label: '名前',
         value: track.name,
         onChange: (v) => setTrackProp(this.store, track.id, 'name', v, { label: 'トラック名を変更' }),
-      }),
+      }).node,
       el('div.field', {}, [
         el('span.field-label', { text: '種類' }),
         el('span.keyframe-track-info', { text: TRACK_KINDS[track.kind]?.label || track.kind }),
@@ -349,7 +349,7 @@ export class Inspector {
             }
           });
         },
-      }),
+      }).node,
       el('div.field', {}, [
         el('span.field-label', { text: '種類' }),
         el('span.keyframe-track-info', { text: `${CLIP_TYPES[clip.type]?.label || clip.type} / 素材: ${clip.assetId ? (store.state.assets[clip.assetId]?.name || '不明') : 'なし'}` }),
@@ -1110,9 +1110,9 @@ export class Inspector {
     append(shortcuts.body, el('div.hint', {
       html: [
         '<b>Space</b> 再生/停止 · <b>←/→</b> 1フレーム · <b>Shift+←/→</b> 1秒',
-        '<b>Home/End</b> 先頭/末尾 · <b>S</b> 分割 · <b>T</b> 全分割 · <b>Del</b> 削除',
+        '<b>Home/End</b> 先頭/末尾 · <b>K</b> 分割 · <b>T</b> 全分割 · <b>Del</b> 削除',
         '<b>Ctrl+Z / Ctrl+Shift+Z</b> 元に戻す/やり直し · <b>Ctrl+D</b> 複製',
-        '<b>Ctrl+A</b> 全選択 · <b>N</b> スナップ切替 · <b>+/-</b> ズーム · <b>M</b> マーカー',
+        '<b>Ctrl+A</b> 全選択 · <b>S</b> スナップ切替 · <b>+/-</b> ズーム · <b>M</b> マーカー',
         '<b>I / O</b> ワークエリア開始/終了 · <b>Ctrl+S</b> 保存 · <b>Ctrl+E</b> 書き出し',
       ].join('<br>'),
     }));
