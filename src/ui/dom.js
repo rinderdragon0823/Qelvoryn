@@ -70,13 +70,13 @@ export function on(node, event, handler, opts) {
 
 export function icon(name, size = 16) {
   const paths = {
-    play: 'M5 3.5v13l11-6.5z',
-    pause: 'M5 4h3.2v12H5zM10.8 4H14v12h-3.2z',
+    play: 'M7 5l10 7-10 7z',
+    pause: 'M6.5 5h4v14h-4zM13.5 5h4v14h-4z',
     stop: 'M4.5 4.5h11v11h-11z',
-    start: 'M6 4l-2 4 2 4V4zm8 0v8l2-4-2-4zM6.8 4h3.4v12H6.8z',
-    end: 'M18 4l2 4-2 4V4zm-8 0h3.4v12H10zm-2.8 0v8L5 8l2.2-4z',
-    prevFrame: 'M7 5l-3 3.5L7 12V5zm10 0v12l-9-6z',
-    nextFrame: 'M17 5l3 3.5-3 3.5V5zM7 5v12l9-6z',
+    start: 'M7 5h2.6v14H7zM17 5v14l-7.4-7z',
+    end: 'M7 5l7.4 7L7 19zM14.4 5H17v14h-2.6z',
+    prevFrame: 'M11 5v14l-6.4-7zM19.4 5v14l-6.4-7z',
+    nextFrame: 'M4.6 5v14l6.4-7zM13 5v14l6.4-7z',
     scissors: 'M9.6 6.6L14 2h3v2h-2l-4.2 4.2c.4.6.6 1.3.6 2 0 2.2-1.8 4-4 4s-4-1.8-4-4 1.8-4 4-4c.8 0 1.5.2 2.2.6zm-2.4 6.6c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7.4-3.4L17 12l-4.6 4.4c.4-.6.6-1.3.6-2 0-1.6-.9-2.9-2.1-3.5l3.1-3.1z',
     trash: 'M6 7h12l-1 13H7L6 7zm3-3h6l1 2H8l1-2z',
     copy: 'M8 3h9v14H8zM5 6h2v13h9v2H5z',
