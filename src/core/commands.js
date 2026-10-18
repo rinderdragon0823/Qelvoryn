@@ -8,7 +8,7 @@
  */
 
 import {
-  uid, createTrack, canTrackAcceptClip, clipEnd, TRACK_KINDS, createEffect,
+  uid, createTrack, canTrackAcceptClip, tracksAcceptingKind, clipEnd, TRACK_KINDS, createEffect,
 } from './model.js';
 import {
   addKeyframe, removeKeyframe, moveKeyframe, setKeyframeInterp, clearKeyframes,
@@ -167,10 +167,35 @@ export function insertClip(store, trackId, clip, opts = {}) {
   return inserted;
 }
 
+/** True when no clip (except `ignoreIds`) occupies [start, start + duration). */
+export function trackRangeFree(track, start, duration, ignoreIds = new Set()) {
+  const from = Math.max(0, Math.round(start));
+  const to = from + Math.max(1, Math.round(duration));
+  for (const clip of track.clips) {
+    if (ignoreIds.has(clip.id)) continue;
+    const end = clip.startTicks + clip.durationTicks;
+    if (from < end && clip.startTicks < to) return false;
+  }
+  return true;
+}
+
+/**
+ * Choose the track that should receive a new clip (multi-track spill UX):
+ * the preferred track when it accepts the type and is free at that spot,
+ * then the first free track of the primary kind, then any free compatible
+ * track.  Returns null when a new track must be created.
+ */
+export function findTrackForClip(project, clipType, { ticks = 0, durationTicks = 0, preferredIndex = -1 } = {}) {
+  const tracks = project.tracks;
+  const preferred = preferredIndex >= 0 ? tracks[preferredIndex] : null;
+  const free = (track) => Boolean(track) && trackRangeFree(track, ticks, durationTicks);
+  if (preferred && canTrackAcceptClip(preferred, clipType) && free(preferred)) return preferred;
+  return tracksAcceptingKind(project, clipType).find(free) || null;
+}
+
 // ---------------------------------------------------------------------------
 // Move
 // ---------------------------------------------------------------------------
-
 /**
  * Compute how far a group of clips may travel without crossing neighbours.
  * @param {Array<{clipId:string, track:object, startTicks:number, durationTicks:number}>} moves
@@ -558,6 +583,23 @@ export function deleteTrack(store, trackId, opts = {}) {
     store.state.tracks.splice(index, 1);
     if (!store.state.tracks.length) store.state.tracks.push(createTrack('video', { name: '動画 1' }));
   });
+}
+
+/** Copy a track with all of its clips directly below (new ids everywhere). */
+export function duplicateTrack(store, trackId, opts = {}) {
+  const index = store.state.tracks.findIndex((t) => t.id === trackId);
+  if (index < 0) return null;
+  const source = store.state.tracks[index];
+  const copy = JSON.parse(JSON.stringify(source));
+  copy.id = uid('track');
+  copy.name = opts.name || `${source.name} のコピー`;
+  copy.clips = copy.clips.map((clip) => cloneClip(clip, { trackId: copy.id }));
+  copy.locked = false;
+  store.transact(opts.label || 'トラックを複製', () => {
+    store.touch(['tracks']);
+    store.state.tracks.splice(index + 1, 0, copy);
+  });
+  return copy;
 }
 
 export function reorderTracks(store, fromIndex, toIndex, opts = {}) {

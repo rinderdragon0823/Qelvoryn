@@ -6,9 +6,10 @@ import { secondsToTicks, TICKS_PER_SECOND } from '../src/core/time.js';
 import {
   insertClip, findFreeSlot, clampStartOnTrack, computeMoveConstraints, applyMove, moveSelectionTo,
   trimClipEdge, splitAt, razorAll, deleteClips, duplicateClips, setClipSpeed, setClipTiming,
-  addTrack, deleteTrack, reorderTracks, setTrackProp, toggleTrackFlag, setParamValue,
+  addTrack, deleteTrack, duplicateTrack, reorderTracks, setTrackProp, toggleTrackFlag, setParamValue,
   toggleKeyframe, moveKeyframeTo, setKeyframeValue, addEffect, removeEffect, toggleEffect, moveEffect,
   setEffectParam, snapTime, snapCandidates, addMarker, clipDurationLabel, allClipIds, clipsInRange,
+  trackRangeFree, findTrackForClip,
 } from '../src/core/commands.js';
 
 function setup() {
@@ -49,6 +50,54 @@ test('findFreeSlot and clampStartOnTrack respect neighbours', () => {
   const clip = createClip('video', { startTicks: 1500, durationTicks: 500 });
   assert.equal(clampStartOnTrack(v1, clip, 800), 1000, 'cannot move into the left neighbour');
   assert.equal(clampStartOnTrack(v1, clip, 5000), 2500, 'cannot move into the right neighbour');
+});
+
+test('trackRangeFree respects boundaries', () => {
+  const { v1 } = setup();
+  v1.clips.push(createClip('video', { startTicks: 1000, durationTicks: 2000 }));
+  assert.equal(trackRangeFree(v1, 0, 1000), true, 'touching the left edge is free');
+  assert.equal(trackRangeFree(v1, 3000, 500), true, 'touching the right edge is free');
+  assert.equal(trackRangeFree(v1, 500, 1000), false, 'overlapping the clip is not free');
+  assert.equal(trackRangeFree(v1, 2000, 100), false, 'starting inside the clip is not free');
+});
+
+test('findTrackForClip spills to the next free track, or reports a new track is needed', () => {
+  const { store, v1, v2, audio } = setup();
+  insertClip(store, v1.id, createClip('video', { startTicks: 0, durationTicks: 4000 }), { resolveOverlap: false });
+
+  const preferred = findTrackForClip(store.state, 'video', {
+    ticks: 0, durationTicks: 1000, preferredIndex: store.state.tracks.indexOf(v1),
+  });
+  assert.equal(preferred, v2, 'busy preferred lane spills to the free video track');
+
+  insertClip(store, v2.id, createClip('video', { startTicks: 0, durationTicks: 4000 }), { resolveOverlap: false });
+  assert.equal(
+    findTrackForClip(store.state, 'video', { ticks: 0, durationTicks: 4000 }),
+    null,
+    'all video tracks busy at that spot -> null lets the caller create a new track',
+  );
+  assert.equal(
+    findTrackForClip(store.state, 'video', { ticks: 8000, durationTicks: 1000 }),
+    v1,
+    'free spot on the first video track',
+  );
+  assert.equal(findTrackForClip(store.state, 'audio', { ticks: 0, durationTicks: 1000 }), audio);
+});
+
+test('duplicateTrack clones the track and its clips with new ids', () => {
+  const { store, v1 } = setup();
+  const clip = createClip('video', { startTicks: 0, durationTicks: 1000 });
+  insertClip(store, v1.id, clip, { resolveOverlap: false });
+  const copy = duplicateTrack(store, v1.id);
+  const index = store.state.tracks.indexOf(v1);
+  assert.equal(store.state.tracks[index + 1], copy, 'copy sits right below the source');
+  assert.notEqual(copy.id, v1.id);
+  assert.equal(copy.clips.length, 1);
+  assert.notEqual(copy.clips[0].id, clip.id, 'clip ids are regenerated');
+  assert.equal(copy.clips[0].trackId, copy.id, 'clips point at the copy');
+  assert.equal(copy.clips[0].startTicks, clip.startTicks);
+  copy.clips[0].startTicks = 9999;
+  assert.equal(clip.startTicks, 0, 'deep copy: editing the clone does not touch the source');
 });
 
 test('computeMoveConstraints keeps a group between its neighbours', () => {

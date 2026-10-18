@@ -16,7 +16,7 @@ import { el, append, clear, icon, iconButton, button, formatNumber } from './dom
 import { TRACK_KINDS, CLIP_TYPES, clipEnd, canTrackAcceptClip, createClip } from '../core/model.js';
 import {
   insertClip, deleteClips, duplicateClips, splitAt, setTrackProp, toggleTrackFlag,
-  reorderTracks, deleteTrack, addTrack, computeMoveConstraints, trimClipEdge,
+  reorderTracks, deleteTrack, addTrack, duplicateTrack, computeMoveConstraints, trimClipEdge,
   selectedClips, clipsById,
 } from '../core/commands.js';
 import { TICKS_PER_SECOND, formatTimecode, parseTimecode, snapTicksToFrame } from '../core/time.js';
@@ -1049,6 +1049,10 @@ export class TimelineView {
     const items = [
       { label: '上へ移動', shortcut: '', disabled: index === 0, action: () => reorderTracks(this.store, index, index - 1) },
       { label: '下へ移動', disabled: index === trackCount - 1, action: () => reorderTracks(this.store, index, index + 1) },
+      { label: '---' },
+      { label: '上にトラックを追加', action: () => addTrack(this.store, track.kind, { index }) },
+      { label: '下にトラックを追加', action: () => addTrack(this.store, track.kind, { index: index + 1 }) },
+      { label: 'このトラックを複製', action: () => duplicateTrack(this.store, track.id) },
       { label: '---' },
       { label: track.locked ? 'ロック解除' : 'ロック', action: () => toggleTrackFlag(this.store, track.id, 'locked') },
       { label: track.hidden ? '表示する' : '非表示にする', action: () => toggleTrackFlag(this.store, track.id, 'hidden') },

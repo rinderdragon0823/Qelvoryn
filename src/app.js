@@ -9,7 +9,7 @@
 
 import { ProjectStore, deepClone } from './core/store.js';
 import {
-  createProject, createTrack, createClip, uid, projectDuration, canTrackAcceptClip, TRACK_KINDS, DEFAULT_CLIP_SECONDS,
+  createProject, createTrack, createClip, uid, projectDuration, TRACK_KINDS, DEFAULT_CLIP_SECONDS,
 } from './core/model.js';
 import { TICKS_PER_SECOND, secondsToTicks, snapTicksToFrame, ticksToSeconds, formatTimecode, formatDuration } from './core/time.js';
 import * as cmd from './core/commands.js';
@@ -766,43 +766,69 @@ export class QelvorynApp {
     });
   }
 
-  trackForClipType(clipType, preferredIndex = null) {
-    const tracks = this.store.state.tracks;
-    if (preferredIndex != null && tracks[preferredIndex] && canTrackAcceptClip(tracks[preferredIndex], clipType)) {
-      return tracks[preferredIndex];
-    }
-    const primary = { video: 'video', image: 'image', text: 'text', audio: 'audio', shape: 'overlay', effect: 'effect' }[clipType];
-    return tracks.find((t) => t.kind === primary && canTrackAcceptClip(t, clipType))
-      || tracks.find((t) => canTrackAcceptClip(t, clipType))
-      || null;
+  /** Track kind used when a new track must be created for a clip type. */
+  trackKindForClip(clipType) {
+    if (clipType === 'audio') return 'audio';
+    if (clipType === 'text') return 'text';
+    if (clipType === 'image') return 'image';
+    if (clipType === 'effect') return 'effect';
+    return 'video';
   }
 
   /**
-   * Drop an asset on the timeline.
+   * Create a track that can hold `clipType`.
+   * Visual tracks appear right above `nearIndex` (top when negative),
+   * audio tracks right below it (bottom when negative).
+   */
+  createTrackForClip(clipType, nearIndex = -1) {
+    const kind = this.trackKindForClip(clipType);
+    const def = TRACK_KINDS[kind];
+    const count = this.store.state.tracks.filter((t) => t.kind === kind).length + 1;
+    const tracks = this.store.state.tracks;
+    let index;
+    if (nearIndex >= 0 && nearIndex < tracks.length) index = kind === 'audio' ? nearIndex + 1 : nearIndex;
+    else index = kind === 'audio' ? tracks.length : 0;
+    return cmd.addTrack(this.store, kind, { name: `${def.label} ${count}`, index });
+  }
+
+  /**
+   * Drop an asset on the timeline (Premiere/YMM4 style):
+   * the preferred lane wins when it is free, otherwise the first free
+   * compatible track is used, and a new track is created when everything
+   * at that spot is busy.
    * @param {string} assetId
    * @param {{trackIndex?:number, ticks?:number}} [opts]
    */
   addAssetToTimeline(assetId, opts = {}) {
     const asset = this.store.state.assets[assetId];
     if (!asset) return null;
-    const start = opts.ticks != null ? opts.ticks : this.session.playheadTicks;
-    const clip = this.clipFromAsset(asset, start);
-    let track = this.trackForClipType(clip.type, opts.trackIndex);
-    if (!track) {
-      const kind = clip.type === 'audio' ? 'audio' : clip.type === 'text' ? 'text' : clip.type === 'image' ? 'image' : 'video';
-      track = cmd.addTrack(this.store, kind, { name: `${TRACK_KINDS[kind].label} ${this.store.state.tracks.filter((t) => t.kind === kind).length + 1}` });
-    }
+    const start = opts.ticks != null ? Math.max(0, Math.round(opts.ticks)) : this.session.playheadTicks;
+    const preferredIndex = opts.trackIndex != null && opts.trackIndex >= 0 ? opts.trackIndex : -1;
     let inserted = null;
-    try {
-      inserted = cmd.insertClip(this.store, track.id, clip, { label: `素材を追加: ${asset.name}` });
-    } catch (err) {
-      this.toast(String(err.message || err), 'error');
-      return null;
-    }
+    let track = null;
+    let created = false;
+    this.store.transact(`素材を追加: ${asset.name}`, () => {
+      const clip = this.clipFromAsset(asset, start);
+      track = cmd.findTrackForClip(this.store.state, clip.type, {
+        ticks: clip.startTicks,
+        durationTicks: clip.durationTicks,
+        preferredIndex,
+      });
+      if (!track) {
+        track = this.createTrackForClip(clip.type, preferredIndex);
+        created = true;
+      }
+      inserted = cmd.insertClip(this.store, track.id, clip, {
+        label: `素材を追加: ${asset.name}`,
+        resolveOverlap: false,
+      });
+    });
     if (inserted) {
       this.selectClips([inserted.id]);
       this.timeline.scrollToTicks(inserted.startTicks);
-      this.setStatus(`「${asset.name}」を ${track.name} に配置しました`);
+      this.setStatus(created
+        ? `「${asset.name}」を新しいトラック「${track.name}」に配置しました`
+        : `「${asset.name}」を「${track.name}」に配置しました`);
     }
     return inserted;
   }
@@ -815,10 +841,7 @@ export class QelvorynApp {
     const asset = this.store.state.assets[assetId];
     if (!asset) return null;
     const clip = this.clipFromAsset(asset, this.session.playheadTicks);
-    const kind = clip.type === 'audio' ? 'audio' : clip.type === 'text' ? 'text' : clip.type === 'image' ? 'image' : 'video';
-    const def = TRACK_KINDS[kind];
-    const count = this.store.state.tracks.filter((t) => t.kind === kind).length + 1;
-    const track = cmd.addTrack(this.store, kind, { name: `${def.label} ${count}` });
+    const track = this.createTrackForClip(clip.type, -1);
     return this.addAssetToTimeline(assetId, {
       trackIndex: this.store.state.tracks.indexOf(track),
       ticks: this.session.playheadTicks,
