@@ -32,7 +32,20 @@ export function append(parent, children) {
   const list = Array.isArray(children) ? children : [children];
   for (const child of list) {
     if (child == null || child === false) continue;
-    parent.appendChild(typeof child === 'string' ? document.createTextNode(child) : child);
+    if (typeof child === 'string') {
+      parent.appendChild(document.createTextNode(child));
+      continue;
+    }
+    let node = child;
+    if (node.nodeType == null && node.node && node.node.nodeType != null) {
+      console.warn('[Qelvoryn] append: {node} オブジェクトを展開しました (.node を渡してください)', node);
+      node = node.node;
+    }
+    if (node.nodeType == null) {
+      console.warn('[Qelvoryn] append: Node 以外の値は無視しました', node);
+      continue;
+    }
+    parent.appendChild(node);
   }
   return parent;
 }

@@ -434,6 +434,15 @@ test('MediaRecorder 書き出しスタックが実フレームを記録する', 
   assert(size > 1000, `the recorder produced real data (${size} bytes, ${containers[0].mime})`);
 });
 
+test('append は {node} オブジェクトや非 Node 値でもアプリを壊さない', async () => {
+  const { append, el } = await import('../../src/ui/dom.js');
+  const host = document.createElement('div');
+  const span = el('span', { text: 'x' });
+  append(host, [{ node: span }, 123, null, 'text', false]);
+  assert(host.childElementCount === 1, 'span が展開されて追加される');
+  assert(host.textContent.includes('text'), '文字列はテキストノードになる');
+});
+
 test('インスペクタが全タブで例外なく描画される (トラック/クリップ選択)', async () => {
   const { Inspector } = await import('../../src/ui/inspector.js');
   const track = createTrack('video', { name: 'V1' });
