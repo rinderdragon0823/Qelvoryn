@@ -73,6 +73,7 @@ export class Toolbar {
   buildFileGroup() {
     return el('div', { style: { display: 'flex', gap: '4px', alignItems: 'center' } }, [
       iconButton('plus', { title: '新規プロジェクト', onclick: () => this.app.newProject() }),
+      button('デモ', { icon: 'film', title: 'デモプロジェクトを開く', onclick: () => this.app.loadDemo() }),
       iconButton('download', { title: 'プロジェクトをJSONで保存', onclick: () => this.app.persistence.exportProjectFile() }),
       button('AI演出', { icon: 'sparkles', title: '自動ズーム・クリック演出・字幕', onclick: () => autoDirectorDialog(this.app) }),
       button('書き出し', { icon: 'download', title: '動画を書き出す (Ctrl+E)', onclick: () => exportDialog(this.app) }),

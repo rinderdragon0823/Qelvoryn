@@ -10,7 +10,7 @@
 
 import { ProjectStore } from '../../src/core/store.js';
 import {
-  createProject, createTrack, createClip, createAsset, projectDuration,
+  createProject, createTrack, createClip, createAsset, projectDuration, subtitleTextStyle,
 } from '../../src/core/model.js';
 import { insertClip } from '../../src/core/commands.js';
 import { secondsToTicks } from '../../src/core/time.js';
@@ -221,6 +221,37 @@ test('renderFrame が図形クリップを実際に描画する', async () => {
   assert(corner[0] < 40 && corner[1] < 40 && corner[2] < 40, `corner should stay background, got ${corner}`);
 });
 
+test('renderFrame composites multiple layers instead of replacing them', async () => {
+  const bgTrack = createTrack('video', { name: '背景' });
+  const fgTrack = createTrack('video', { name: '前景' });
+  const store = makeStore({ tracks: [fgTrack, bgTrack] });
+  insertClip(store, bgTrack.id, createClip('shape', {
+    startTicks: 0,
+    durationTicks: secondsToTicks(2),
+    shape: {
+      kind: 'rect', width: 1.1, height: 1.1, fill: '#101820', fillAlpha: 1, strokeWidth: 0,
+    },
+  }), { resolveOverlap: false });
+  insertClip(store, fgTrack.id, redEllipseClip({ width: 0.4 }), { resolveOverlap: false });
+
+  const mediaPool = new MediaPool(store);
+  const { ctx } = makeCanvas();
+  await renderFrame({
+    ctx,
+    project: store.state,
+    timeTicks: secondsToTicks(1),
+    source: new MediaFrameSource(mediaPool),
+    scale: 1,
+  });
+
+  const centre = pixel(ctx, 160, 90);
+  const corner = pixel(ctx, 3, 3);
+  assert(centre[0] > 200 && centre[1] < 60, `top layer is visible, got ${centre}`);
+  assertEqual(corner[3], 255, `background layer stays opaque, got ${corner}`);
+  assert(corner[0] > 8 && corner[0] < 40 && corner[1] < 40, `background colour shows through, got ${corner}`);
+  assert(!(corner[0] === 0 && corner[1] === 0 && corner[2] === 0), 'the background clip is not lost');
+});
+
 test('renderFrame がテキストクリップを描画する', async () => {
   const track = createTrack('text', { name: 'T1' });
   const store = makeStore({ tracks: [track] });
@@ -287,7 +318,7 @@ test('自動演出ズームが合成結果を実際に変える (描画順の検
   assert(stillOutside[0] < 60, `x=230 should stay outside even at 2x, got ${stillOutside}`);
 });
 
-test('自動演出の字幕が映像の上に描画される', async () => {
+test('字幕レイヤーが映像の上に描画される', async () => {
   const video = createTrack('video', { name: 'V1' });
   const store = makeStore({ tracks: [video] });
   insertClip(store, video.id, redEllipseClip({ width: 0.6 }), { resolveOverlap: false });
@@ -298,20 +329,25 @@ test('自動演出の字幕が映像の上に描画される', async () => {
   await renderFrame({ ctx: baseCtx, project: store.state, timeTicks: secondsToTicks(1), source: source(), scale: 1 });
   const base = [...baseCtx.getImageData(0, 0, 320, 180).data];
 
-  const app = { store, mediaPool, projectDuration: () => projectDuration(store.state), selectTrack: () => {} };
-  new AutoDirector(app).apply({
-    range: { inTicks: 0, outTicks: secondsToTicks(2) },
-    zooms: false,
-    cues: [{ startMs: 200, endMs: 1800, text: '字幕テスト' }],
+  const subtitleTrack = createTrack('text', { name: '字幕' });
+  store.transact('字幕レイヤーを追加', () => {
+    store.touch(['tracks']);
+    store.state.tracks.unshift(subtitleTrack);
   });
+  insertClip(store, subtitleTrack.id, createClip('text', {
+    name: '字幕',
+    startTicks: 0,
+    durationTicks: secondsToTicks(2),
+    text: subtitleTextStyle('字幕テスト'),
+    transform: { x: 0.5, y: 0.86 },
+  }), { resolveOverlap: false });
 
   const { ctx: subCtx } = makeCanvas();
   await renderFrame({ ctx: subCtx, project: store.state, timeTicks: secondsToTicks(1), source: source(), scale: 1 });
   const withSub = [...subCtx.getImageData(0, 0, 320, 180).data];
   const changed = frameDiff(base, withSub);
   assert(changed > 60, `subtitle text must be visible above the picture (changed ${changed} pixels)`);
-  const subtitleTrack = store.state.tracks.find((t) => t.name === '字幕（AI）');
-  assert(store.state.tracks.indexOf(subtitleTrack) === 0, 'subtitle track is the top layer');
+  assertEqual(store.state.tracks.indexOf(subtitleTrack), 0, 'subtitle track is the top layer');
 });
 
 test('MediaPool が実画像ファイルを読み込んで描画する', async () => {

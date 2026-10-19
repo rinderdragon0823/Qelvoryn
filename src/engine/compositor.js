@@ -261,6 +261,7 @@ async function drawClipIntoTrackLayer(trackLayer, clip, timeTicks, project, sour
   }
 
   const dst = trackLayer.begin();
+  dst.drawImage(trackLayer.srcCanvas, 0, 0);
   dst.save();
   dst.globalAlpha = Math.max(0, Math.min(1, visual.opacity));
   dst.globalCompositeOperation = clip.blendMode || 'source-over';
@@ -349,6 +350,7 @@ async function renderFrameUnlocked({ ctx, project, timeTicks, source, scale = 1 
     drawn += 1;
 
     const dst = frameLayer.begin();
+    dst.drawImage(frameLayer.srcCanvas, 0, 0);
     dst.save();
     dst.globalAlpha = Math.max(0, Math.min(1, track.opacity ?? 1));
     dst.globalCompositeOperation = track.blendMode || 'source-over';

@@ -95,7 +95,7 @@ export function createProject(opts = {}) {
       height: opts.height || 1080,
       fps: opts.fps || 30,
       sampleRate: 48000,
-      backgroundColor: '#000000',
+      backgroundColor: opts.backgroundColor || '#000000',
     },
     assets: {},
     assetOrder: [],
@@ -381,6 +381,13 @@ export function normalizeProject(project) {
     sampleRate: Math.round(s.sampleRate || 48000),
     backgroundColor: s.backgroundColor || '#000000',
   };
+  const area = s.workArea;
+  if (area && Number.isFinite(area.inTicks) && Number.isFinite(area.outTicks) && area.outTicks > area.inTicks) {
+    out.settings.workArea = {
+      inTicks: Math.max(0, Math.round(area.inTicks)),
+      outTicks: Math.max(0, Math.round(area.outTicks)),
+    };
+  }
   out.tracks = Array.isArray(out.tracks) ? out.tracks.filter((t) => t && typeof t === 'object') : [];
   const seenTrackIds = new Set();
   for (const track of out.tracks) {

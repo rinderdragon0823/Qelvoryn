@@ -18,6 +18,14 @@
 - **書き出し** — MediaRecorder による WebM / MP4 (対応ブラウザ) 書き出し、作業範囲指定、PNG スチル書き出し。
 - **自動保存** — 編集内容は IndexedDB に自動保存され、次回起動時に復元されます。プロジェクトは JSON (.qelvoryn.json) として書き出し / 読み込み可能。
 
+## デモ
+
+![Qelvoryn デモ](demo/poster.jpg)
+
+- **デモ動画** — [demo/demo.mp4](demo/demo.mp4) (公開サイト: <https://rinderdragon0823.github.io/Qelvoryn/demo/demo.mp4>)。Qelvoryn 自身のエンジン (`renderFrame`) で全フレームをレンダリングした 20 秒のショートデモです。レイヤー合成・図形アニメーション・キーフレーム・字幕・カメラズーム・ビネット・サウンドトラック入り。
+- **デモプロジェクト** — [demo/demo.qelvoryn.json](demo/demo.qelvoryn.json)。アプリ上部の **「デモ」ボタン** で読み込むか、JSON を開いてそのまま編集できます。
+- **再生成** — `node tools/make-demo.mjs` (ヘッドレス Chrome/Edge と ffmpeg が必要。アプリ本体は依存ゼロのまま)。
+
 ## キーボードショートカット
 
 | キー | 動作 |
@@ -123,7 +131,9 @@ styles/main.css     スタイル
 tests/              Node ロジックテスト
 tests.html          ブラウザ統合テスト
 tools/serve.mjs     開発用静的サーバ
+tools/make-demo.mjs デモ動画の生成 (ヘッドレス Chrome + ffmpeg)
 tools/mcp-server.mjs  AI 連携 (MCP) サーバー
+demo/               デモ動画 (demo.mp4) とデモプロジェクト
 ```
 
 ## 書き出しの注意

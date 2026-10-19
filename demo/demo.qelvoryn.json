@@ -1,0 +1,3919 @@
+{
+  "format": "qelvoryn-project",
+  "version": 1,
+  "exportedAt": "2026-10-19T21:01:44.753Z",
+  "app": "Qelvoryn",
+  "project": {
+    "schema": 1,
+    "id": "proj_mvfqpa5q442ev1",
+    "name": "Qelvoryn デモ",
+    "createdAt": 1792443704750,
+    "modifiedAt": 1792443704750,
+    "settings": {
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "sampleRate": 48000,
+      "backgroundColor": "#0b1020",
+      "workArea": {
+        "inTicks": 0,
+        "outTicks": 2400000
+      }
+    },
+    "assets": {},
+    "assetOrder": [],
+    "tracks": [
+      {
+        "id": "trk_mvfqpa5q24lig2",
+        "kind": "video",
+        "name": "字幕",
+        "clips": [
+          {
+            "id": "clip_mvfqpa5r54cls4s",
+            "type": "text",
+            "trackId": "trk_mvfqpa5q24lig2",
+            "assetId": null,
+            "name": "YMM4 方式のレイヤー編集",
+            "color": null,
+            "startTicks": 222000,
+            "durationTicks": 468000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.855,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [],
+            "keyframes": {
+              "opacity": [
+                {
+                  "id": "kf_mvfqpa5r5xpiz4t",
+                  "t": 0,
+                  "v": 0,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r5aiau4u",
+                  "t": 30000,
+                  "v": 1,
+                  "interp": "easeOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r54vy04v",
+                  "t": 438000,
+                  "v": 1,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r2mqj24w",
+                  "t": 468000,
+                  "v": 0,
+                  "interp": "easeIn",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ]
+            },
+            "metadata": {},
+            "text": {
+              "content": "YMM4 方式のレイヤー編集",
+              "fontFamily": "Noto Sans JP, sans-serif",
+              "fontSize": 0.05,
+              "fontWeight": 700,
+              "italic": false,
+              "color": "#ffffff",
+              "align": "center",
+              "valign": "middle",
+              "lineHeight": 1.25,
+              "letterSpacing": 0,
+              "strokeColor": "#000000",
+              "strokeWidth": 0.005,
+              "background": {
+                "enabled": false,
+                "color": "#000000",
+                "alpha": 0.5,
+                "padding": 0.4,
+                "radius": 0.15
+              },
+              "shadow": {
+                "enabled": true,
+                "x": 0,
+                "y": 2,
+                "blur": 6,
+                "color": "#000000",
+                "alpha": 0.7
+              },
+              "maxWidth": 0.86
+            }
+          },
+          {
+            "id": "clip_mvfqpa5r4hxus4x",
+            "type": "text",
+            "trackId": "trk_mvfqpa5q24lig2",
+            "assetId": null,
+            "name": "キーフレームで自由にアニメーション",
+            "color": null,
+            "startTicks": 678000,
+            "durationTicks": 468000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.855,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [],
+            "keyframes": {
+              "opacity": [
+                {
+                  "id": "kf_mvfqpa5r74o4c4y",
+                  "t": 0,
+                  "v": 0,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r6bsq24z",
+                  "t": 30000,
+                  "v": 1,
+                  "interp": "easeOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5rb2z250",
+                  "t": 438000,
+                  "v": 1,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r3cm3351",
+                  "t": 468000,
+                  "v": 0,
+                  "interp": "easeIn",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ]
+            },
+            "metadata": {},
+            "text": {
+              "content": "キーフレームで自由にアニメーション",
+              "fontFamily": "Noto Sans JP, sans-serif",
+              "fontSize": 0.05,
+              "fontWeight": 700,
+              "italic": false,
+              "color": "#ffffff",
+              "align": "center",
+              "valign": "middle",
+              "lineHeight": 1.25,
+              "letterSpacing": 0,
+              "strokeColor": "#000000",
+              "strokeWidth": 0.005,
+              "background": {
+                "enabled": false,
+                "color": "#000000",
+                "alpha": 0.5,
+                "padding": 0.4,
+                "radius": 0.15
+              },
+              "shadow": {
+                "enabled": true,
+                "x": 0,
+                "y": 2,
+                "blur": 6,
+                "color": "#000000",
+                "alpha": 0.7
+              },
+              "maxWidth": 0.86
+            }
+          },
+          {
+            "id": "clip_mvfqpa5r476nc52",
+            "type": "text",
+            "trackId": "trk_mvfqpa5q24lig2",
+            "assetId": null,
+            "name": "字幕もワンクリックで追加",
+            "color": null,
+            "startTicks": 1134000,
+            "durationTicks": 444000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.855,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [],
+            "keyframes": {
+              "opacity": [
+                {
+                  "id": "kf_mvfqpa5r7gla853",
+                  "t": 0,
+                  "v": 0,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r4u08654",
+                  "t": 30000,
+                  "v": 1,
+                  "interp": "easeOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r461hi55",
+                  "t": 414000,
+                  "v": 1,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r6peha56",
+                  "t": 444000,
+                  "v": 0,
+                  "interp": "easeIn",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ]
+            },
+            "metadata": {},
+            "text": {
+              "content": "字幕もワンクリックで追加",
+              "fontFamily": "Noto Sans JP, sans-serif",
+              "fontSize": 0.05,
+              "fontWeight": 700,
+              "italic": false,
+              "color": "#ffffff",
+              "align": "center",
+              "valign": "middle",
+              "lineHeight": 1.25,
+              "letterSpacing": 0,
+              "strokeColor": "#000000",
+              "strokeWidth": 0.005,
+              "background": {
+                "enabled": false,
+                "color": "#000000",
+                "alpha": 0.5,
+                "padding": 0.4,
+                "radius": 0.15
+              },
+              "shadow": {
+                "enabled": true,
+                "x": 0,
+                "y": 2,
+                "blur": 6,
+                "color": "#000000",
+                "alpha": 0.7
+              },
+              "maxWidth": 0.86
+            }
+          },
+          {
+            "id": "clip_mvfqpa5r9wujf57",
+            "type": "text",
+            "trackId": "trk_mvfqpa5q24lig2",
+            "assetId": null,
+            "name": "カメラズームで自動演出",
+            "color": null,
+            "startTicks": 1566000,
+            "durationTicks": 432000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.855,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [],
+            "keyframes": {
+              "opacity": [
+                {
+                  "id": "kf_mvfqpa5r4i9yl58",
+                  "t": 0,
+                  "v": 0,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r70oj359",
+                  "t": 30000,
+                  "v": 1,
+                  "interp": "easeOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r5xts05a",
+                  "t": 402000,
+                  "v": 1,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r4q8v25b",
+                  "t": 432000,
+                  "v": 0,
+                  "interp": "easeIn",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ]
+            },
+            "metadata": {},
+            "text": {
+              "content": "カメラズームで自動演出",
+              "fontFamily": "Noto Sans JP, sans-serif",
+              "fontSize": 0.05,
+              "fontWeight": 700,
+              "italic": false,
+              "color": "#ffffff",
+              "align": "center",
+              "valign": "middle",
+              "lineHeight": 1.25,
+              "letterSpacing": 0,
+              "strokeColor": "#000000",
+              "strokeWidth": 0.005,
+              "background": {
+                "enabled": false,
+                "color": "#000000",
+                "alpha": 0.5,
+                "padding": 0.4,
+                "radius": 0.15
+              },
+              "shadow": {
+                "enabled": true,
+                "x": 0,
+                "y": 2,
+                "blur": 6,
+                "color": "#000000",
+                "alpha": 0.7
+              },
+              "maxWidth": 0.86
+            }
+          },
+          {
+            "id": "clip_mvfqpa5r1f68z5c",
+            "type": "text",
+            "trackId": "trk_mvfqpa5q24lig2",
+            "assetId": null,
+            "name": "そのまま動画に書き出し",
+            "color": null,
+            "startTicks": 1986000,
+            "durationTicks": 384000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.855,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [],
+            "keyframes": {
+              "opacity": [
+                {
+                  "id": "kf_mvfqpa5r2dqhp5d",
+                  "t": 0,
+                  "v": 0,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r9xz1i5e",
+                  "t": 30000,
+                  "v": 1,
+                  "interp": "easeOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r8r8a75f",
+                  "t": 354000,
+                  "v": 1,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r14e85g",
+                  "t": 384000,
+                  "v": 0,
+                  "interp": "easeIn",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ]
+            },
+            "metadata": {},
+            "text": {
+              "content": "そのまま動画に書き出し",
+              "fontFamily": "Noto Sans JP, sans-serif",
+              "fontSize": 0.05,
+              "fontWeight": 700,
+              "italic": false,
+              "color": "#ffffff",
+              "align": "center",
+              "valign": "middle",
+              "lineHeight": 1.25,
+              "letterSpacing": 0,
+              "strokeColor": "#000000",
+              "strokeWidth": 0.005,
+              "background": {
+                "enabled": false,
+                "color": "#000000",
+                "alpha": 0.5,
+                "padding": 0.4,
+                "radius": 0.15
+              },
+              "shadow": {
+                "enabled": true,
+                "x": 0,
+                "y": 2,
+                "blur": 6,
+                "color": "#000000",
+                "alpha": 0.7
+              },
+              "maxWidth": 0.86
+            }
+          }
+        ],
+        "locked": false,
+        "hidden": false,
+        "muted": false,
+        "solo": false,
+        "height": 84,
+        "volume": 1,
+        "opacity": 1,
+        "blendMode": "source-over",
+        "color": null
+      },
+      {
+        "id": "trk_mvfqpa5q2zlwp3",
+        "kind": "video",
+        "name": "演出",
+        "clips": [
+          {
+            "id": "clip_mvfqpa5r1874i5i",
+            "type": "effect",
+            "trackId": "trk_mvfqpa5q2zlwp3",
+            "assetId": null,
+            "name": "ビネット",
+            "color": null,
+            "startTicks": 0,
+            "durationTicks": 2400000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.5,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [
+              {
+                "id": "fx_mvfqpa5r35z6x5h",
+                "type": "frameVignette",
+                "enabled": true,
+                "params": {
+                  "strength": 0.5,
+                  "radius": 0.6,
+                  "color": "#000000"
+                },
+                "_missing": false
+              }
+            ],
+            "keyframes": {},
+            "metadata": {}
+          }
+        ],
+        "locked": false,
+        "hidden": false,
+        "muted": false,
+        "solo": false,
+        "height": 84,
+        "volume": 1,
+        "opacity": 1,
+        "blendMode": "source-over",
+        "color": null
+      },
+      {
+        "id": "trk_mvfqpa5q9tg4",
+        "kind": "video",
+        "name": "カメラ",
+        "clips": [
+          {
+            "id": "clip_mvfqpa5r9xgca5k",
+            "type": "effect",
+            "trackId": "trk_mvfqpa5q9tg4",
+            "assetId": null,
+            "name": "カメラズーム",
+            "color": null,
+            "startTicks": 1488000,
+            "durationTicks": 384000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.5,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [
+              {
+                "id": "fx_mvfqpa5r1ycs05j",
+                "type": "cameraTransform",
+                "enabled": true,
+                "params": {
+                  "scale": 1.28,
+                  "x": 0.62,
+                  "y": 0.44,
+                  "rotation": 0
+                },
+                "_missing": false
+              }
+            ],
+            "keyframes": {
+              "effects.fx_mvfqpa5r1ycs05j.scale": [
+                {
+                  "id": "kf_mvfqpa5r6kxd05l",
+                  "t": 0,
+                  "v": 1,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r999ms5m",
+                  "t": 72000,
+                  "v": 1.28,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r96hk65n",
+                  "t": 312000,
+                  "v": 1.28,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r3q705o",
+                  "t": 384000,
+                  "v": 1,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ]
+            },
+            "metadata": {}
+          }
+        ],
+        "locked": false,
+        "hidden": false,
+        "muted": false,
+        "solo": false,
+        "height": 84,
+        "volume": 1,
+        "opacity": 1,
+        "blendMode": "source-over",
+        "color": null
+      },
+      {
+        "id": "trk_mvfqpa5q1cou5",
+        "kind": "video",
+        "name": "光",
+        "clips": [
+          {
+            "id": "clip_mvfqpa5q9z4cnb",
+            "type": "shape",
+            "trackId": "trk_mvfqpa5q1cou5",
+            "assetId": null,
+            "name": "光",
+            "color": null,
+            "startTicks": 0,
+            "durationTicks": 2400000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.5,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [
+              {
+                "id": "fx_mvfqpa5q9wu44a",
+                "type": "blur",
+                "enabled": true,
+                "params": {
+                  "radius": 60,
+                  "quality": 1
+                },
+                "_missing": false
+              }
+            ],
+            "keyframes": {
+              "transform.x": [
+                {
+                  "id": "kf_mvfqpa5q4jzd2c",
+                  "t": 0,
+                  "v": 0.16,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5q4s7khd",
+                  "t": 2400000,
+                  "v": 0.28,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.y": [
+                {
+                  "id": "kf_mvfqpa5q11umye",
+                  "t": 0,
+                  "v": 0.72,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5q2ff1af",
+                  "t": 2400000,
+                  "v": 0.62,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.scaleX": [
+                {
+                  "id": "kf_mvfqpa5q80yppg",
+                  "t": 0,
+                  "v": 0.94,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5q1vxdxh",
+                  "t": 1200000,
+                  "v": 1.06,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5q44gxi",
+                  "t": 2400000,
+                  "v": 0.97,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.scaleY": [
+                {
+                  "id": "kf_mvfqpa5q9z1a0j",
+                  "t": 0,
+                  "v": 0.94,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5q7v9dlk",
+                  "t": 1200000,
+                  "v": 1.06,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5q9iqswl",
+                  "t": 2400000,
+                  "v": 0.97,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ]
+            },
+            "metadata": {},
+            "shape": {
+              "kind": "ellipse",
+              "width": 0.7,
+              "height": 0.7,
+              "radius": 0.2,
+              "fill": "#123f3d",
+              "fillAlpha": 0.75,
+              "stroke": "#000000",
+              "strokeWidth": 0,
+              "points": 5
+            }
+          },
+          {
+            "id": "clip_mvfqpa5q917pcn",
+            "type": "shape",
+            "trackId": "trk_mvfqpa5q1cou5",
+            "assetId": null,
+            "name": "光",
+            "color": null,
+            "startTicks": 0,
+            "durationTicks": 2400000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.5,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [
+              {
+                "id": "fx_mvfqpa5q7rr47m",
+                "type": "blur",
+                "enabled": true,
+                "params": {
+                  "radius": 70,
+                  "quality": 1
+                },
+                "_missing": false
+              }
+            ],
+            "keyframes": {
+              "transform.x": [
+                {
+                  "id": "kf_mvfqpa5r1jp9po",
+                  "t": 0,
+                  "v": 0.84,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5rr877p",
+                  "t": 2400000,
+                  "v": 0.72,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.y": [
+                {
+                  "id": "kf_mvfqpa5r1reygq",
+                  "t": 0,
+                  "v": 0.24,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r6cokmr",
+                  "t": 2400000,
+                  "v": 0.38,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.scaleX": [
+                {
+                  "id": "kf_mvfqpa5r3v0jxs",
+                  "t": 0,
+                  "v": 0.94,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r9ehhvt",
+                  "t": 1200000,
+                  "v": 1.06,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r2yy55u",
+                  "t": 2400000,
+                  "v": 0.97,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.scaleY": [
+                {
+                  "id": "kf_mvfqpa5r359xjv",
+                  "t": 0,
+                  "v": 0.94,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r75ukww",
+                  "t": 1200000,
+                  "v": 1.06,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r8h8uzx",
+                  "t": 2400000,
+                  "v": 0.97,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ]
+            },
+            "metadata": {},
+            "shape": {
+              "kind": "ellipse",
+              "width": 0.85,
+              "height": 0.85,
+              "radius": 0.2,
+              "fill": "#221a4a",
+              "fillAlpha": 0.7,
+              "stroke": "#000000",
+              "strokeWidth": 0,
+              "points": 5
+            }
+          },
+          {
+            "id": "clip_mvfqpa5r1uswjz",
+            "type": "shape",
+            "trackId": "trk_mvfqpa5q1cou5",
+            "assetId": null,
+            "name": "光",
+            "color": null,
+            "startTicks": 0,
+            "durationTicks": 2400000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.5,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [
+              {
+                "id": "fx_mvfqpa5r9g8e4y",
+                "type": "blur",
+                "enabled": true,
+                "params": {
+                  "radius": 50,
+                  "quality": 1
+                },
+                "_missing": false
+              }
+            ],
+            "keyframes": {
+              "transform.x": [
+                {
+                  "id": "kf_mvfqpa5r2wete10",
+                  "t": 0,
+                  "v": 0.8,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r5rfyv11",
+                  "t": 2400000,
+                  "v": 0.9,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.y": [
+                {
+                  "id": "kf_mvfqpa5r5md0a12",
+                  "t": 0,
+                  "v": 0.88,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r2ecc613",
+                  "t": 2400000,
+                  "v": 0.74,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.scaleX": [
+                {
+                  "id": "kf_mvfqpa5r5a8p314",
+                  "t": 0,
+                  "v": 0.94,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r2yqzf15",
+                  "t": 1200000,
+                  "v": 1.06,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r3qkdi16",
+                  "t": 2400000,
+                  "v": 0.97,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.scaleY": [
+                {
+                  "id": "kf_mvfqpa5r4x41m17",
+                  "t": 0,
+                  "v": 0.94,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r43ef818",
+                  "t": 1200000,
+                  "v": 1.06,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r14upr19",
+                  "t": 2400000,
+                  "v": 0.97,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ]
+            },
+            "metadata": {},
+            "shape": {
+              "kind": "ellipse",
+              "width": 0.5,
+              "height": 0.5,
+              "radius": 0.2,
+              "fill": "#3a1828",
+              "fillAlpha": 0.55,
+              "stroke": "#000000",
+              "strokeWidth": 0,
+              "points": 5
+            }
+          },
+          {
+            "id": "clip_mvfqpa5r8rtm41a",
+            "type": "shape",
+            "trackId": "trk_mvfqpa5q1cou5",
+            "assetId": null,
+            "name": "リング",
+            "color": null,
+            "startTicks": 0,
+            "durationTicks": 2400000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 0.45,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.5,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [],
+            "keyframes": {
+              "transform.x": [
+                {
+                  "id": "kf_mvfqpa5r4cs9k1b",
+                  "t": 0,
+                  "v": 0.36,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r19ps51c",
+                  "t": 2400000,
+                  "v": 0.42,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.y": [
+                {
+                  "id": "kf_mvfqpa5r80dfk1d",
+                  "t": 0,
+                  "v": 0.5,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r7qt7f1e",
+                  "t": 2400000,
+                  "v": 0.46,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.rotation": [
+                {
+                  "id": "kf_mvfqpa5r9vtug1f",
+                  "t": 0,
+                  "v": 0,
+                  "interp": "linear",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r13ufc1g",
+                  "t": 2400000,
+                  "v": 75,
+                  "interp": "linear",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.scaleX": [
+                {
+                  "id": "kf_mvfqpa5r1xzy91h",
+                  "t": 0,
+                  "v": 0.96,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r1hjnx1i",
+                  "t": 1200000,
+                  "v": 1.06,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r3i33u1j",
+                  "t": 2400000,
+                  "v": 0.96,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.scaleY": [
+                {
+                  "id": "kf_mvfqpa5r8swke1k",
+                  "t": 0,
+                  "v": 0.96,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r2ki9x1l",
+                  "t": 1200000,
+                  "v": 1.06,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r4u4rx1m",
+                  "t": 2400000,
+                  "v": 0.96,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ]
+            },
+            "metadata": {},
+            "shape": {
+              "kind": "ellipse",
+              "width": 0.62,
+              "height": 0.62,
+              "radius": 0.2,
+              "fill": "#ffffff",
+              "fillAlpha": 0,
+              "stroke": "#34d3c0",
+              "strokeWidth": 0.0025,
+              "points": 5
+            }
+          },
+          {
+            "id": "clip_mvfqpa5r366h41n",
+            "type": "shape",
+            "trackId": "trk_mvfqpa5q1cou5",
+            "assetId": null,
+            "name": "リング",
+            "color": null,
+            "startTicks": 0,
+            "durationTicks": 2400000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 0.55,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.5,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [],
+            "keyframes": {
+              "transform.x": [
+                {
+                  "id": "kf_mvfqpa5r5dux41o",
+                  "t": 0,
+                  "v": 0.78,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r1jbg51p",
+                  "t": 2400000,
+                  "v": 0.72,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.y": [
+                {
+                  "id": "kf_mvfqpa5r68hiz1q",
+                  "t": 0,
+                  "v": 0.3,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r5wad1r",
+                  "t": 2400000,
+                  "v": 0.36,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.rotation": [
+                {
+                  "id": "kf_mvfqpa5r2yyn31s",
+                  "t": 0,
+                  "v": 0,
+                  "interp": "linear",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r8vp6y1t",
+                  "t": 2400000,
+                  "v": -120,
+                  "interp": "linear",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.scaleX": [
+                {
+                  "id": "kf_mvfqpa5r5q1dm1u",
+                  "t": 0,
+                  "v": 0.95,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r8gqk41v",
+                  "t": 1200000,
+                  "v": 1.1,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r67te91w",
+                  "t": 2400000,
+                  "v": 0.95,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.scaleY": [
+                {
+                  "id": "kf_mvfqpa5r8znf41x",
+                  "t": 0,
+                  "v": 0.95,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r23qy01y",
+                  "t": 1200000,
+                  "v": 1.1,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r73n3m1z",
+                  "t": 2400000,
+                  "v": 0.95,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ]
+            },
+            "metadata": {},
+            "shape": {
+              "kind": "ellipse",
+              "width": 0.3,
+              "height": 0.3,
+              "radius": 0.2,
+              "fill": "#ffffff",
+              "fillAlpha": 0,
+              "stroke": "#a07ce0",
+              "strokeWidth": 0.0025,
+              "points": 5
+            }
+          },
+          {
+            "id": "clip_mvfqpa5r63ema21",
+            "type": "shape",
+            "trackId": "trk_mvfqpa5q1cou5",
+            "assetId": null,
+            "name": "ドット",
+            "color": null,
+            "startTicks": 0,
+            "durationTicks": 2400000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.5,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [
+              {
+                "id": "fx_mvfqpa5r6oy7920",
+                "type": "glow",
+                "enabled": true,
+                "params": {
+                  "strength": 0.8,
+                  "radius": 26
+                },
+                "_missing": false
+              }
+            ],
+            "keyframes": {
+              "transform.x": [
+                {
+                  "id": "kf_mvfqpa5r1tdbc22",
+                  "t": 0,
+                  "v": 0.16,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5rp90123",
+                  "t": 1200000,
+                  "v": 0.22,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r563oa24",
+                  "t": 2400000,
+                  "v": 0.16,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.y": [
+                {
+                  "id": "kf_mvfqpa5r4z13d25",
+                  "t": 0,
+                  "v": 0.3,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r6vvrv26",
+                  "t": 1200000,
+                  "v": 0.25,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5rk36p27",
+                  "t": 2400000,
+                  "v": 0.3,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "opacity": [
+                {
+                  "id": "kf_mvfqpa5r3ts8528",
+                  "t": 0,
+                  "v": 0.5,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r71jb429",
+                  "t": 720000,
+                  "v": 1,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r3zhzy2a",
+                  "t": 1560000,
+                  "v": 0.55,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r3scl32b",
+                  "t": 2400000,
+                  "v": 0.9,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ]
+            },
+            "metadata": {},
+            "shape": {
+              "kind": "ellipse",
+              "width": 0.02,
+              "height": 0.02,
+              "radius": 0.2,
+              "fill": "#34d3c0",
+              "fillAlpha": 1,
+              "stroke": "#000000",
+              "strokeWidth": 0,
+              "points": 5
+            }
+          },
+          {
+            "id": "clip_mvfqpa5rkb252d",
+            "type": "shape",
+            "trackId": "trk_mvfqpa5q1cou5",
+            "assetId": null,
+            "name": "ドット",
+            "color": null,
+            "startTicks": 0,
+            "durationTicks": 2400000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.5,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [
+              {
+                "id": "fx_mvfqpa5r5twfg2c",
+                "type": "glow",
+                "enabled": true,
+                "params": {
+                  "strength": 0.8,
+                  "radius": 26
+                },
+                "_missing": false
+              }
+            ],
+            "keyframes": {
+              "transform.x": [
+                {
+                  "id": "kf_mvfqpa5r6j66l2e",
+                  "t": 0,
+                  "v": 0.86,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r6x2qp2f",
+                  "t": 1200000,
+                  "v": 0.8099999999999999,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r9ei0a2g",
+                  "t": 2400000,
+                  "v": 0.86,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.y": [
+                {
+                  "id": "kf_mvfqpa5r1732o2h",
+                  "t": 0,
+                  "v": 0.62,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r78dpf2i",
+                  "t": 1200000,
+                  "v": 0.54,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r2yyrv2j",
+                  "t": 2400000,
+                  "v": 0.62,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "opacity": [
+                {
+                  "id": "kf_mvfqpa5rhxf92k",
+                  "t": 0,
+                  "v": 0.5,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r5lxk92l",
+                  "t": 720000,
+                  "v": 1,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r7l43f2m",
+                  "t": 1560000,
+                  "v": 0.55,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r4kidf2n",
+                  "t": 2400000,
+                  "v": 0.9,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ]
+            },
+            "metadata": {},
+            "shape": {
+              "kind": "ellipse",
+              "width": 0.016,
+              "height": 0.016,
+              "radius": 0.2,
+              "fill": "#a07ce0",
+              "fillAlpha": 1,
+              "stroke": "#000000",
+              "strokeWidth": 0,
+              "points": 5
+            }
+          },
+          {
+            "id": "clip_mvfqpa5r5qa4p2p",
+            "type": "shape",
+            "trackId": "trk_mvfqpa5q1cou5",
+            "assetId": null,
+            "name": "ドット",
+            "color": null,
+            "startTicks": 0,
+            "durationTicks": 2400000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.5,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [
+              {
+                "id": "fx_mvfqpa5r99k4f2o",
+                "type": "glow",
+                "enabled": true,
+                "params": {
+                  "strength": 0.8,
+                  "radius": 26
+                },
+                "_missing": false
+              }
+            ],
+            "keyframes": {
+              "transform.x": [
+                {
+                  "id": "kf_mvfqpa5r5l9o92q",
+                  "t": 0,
+                  "v": 0.68,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r94qoj2r",
+                  "t": 1200000,
+                  "v": 0.7200000000000001,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r7fhng2s",
+                  "t": 2400000,
+                  "v": 0.68,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.y": [
+                {
+                  "id": "kf_mvfqpa5r92hy42t",
+                  "t": 0,
+                  "v": 0.18,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5ryyhu2u",
+                  "t": 1200000,
+                  "v": 0.24,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r488xk2v",
+                  "t": 2400000,
+                  "v": 0.18,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "opacity": [
+                {
+                  "id": "kf_mvfqpa5ri4u2w",
+                  "t": 0,
+                  "v": 0.5,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r1bul62x",
+                  "t": 720000,
+                  "v": 1,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r14cfo2y",
+                  "t": 1560000,
+                  "v": 0.55,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r82auh2z",
+                  "t": 2400000,
+                  "v": 0.9,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ]
+            },
+            "metadata": {},
+            "shape": {
+              "kind": "ellipse",
+              "width": 0.012,
+              "height": 0.012,
+              "radius": 0.2,
+              "fill": "#f6ad55",
+              "fillAlpha": 1,
+              "stroke": "#000000",
+              "strokeWidth": 0,
+              "points": 5
+            }
+          }
+        ],
+        "locked": false,
+        "hidden": false,
+        "muted": false,
+        "solo": false,
+        "height": 84,
+        "volume": 1,
+        "opacity": 1,
+        "blendMode": "source-over",
+        "color": null
+      },
+      {
+        "id": "trk_mvfqpa5q5kqfe6",
+        "kind": "video",
+        "name": "図形",
+        "clips": [
+          {
+            "id": "clip_mvfqpa5r5hsal31",
+            "type": "shape",
+            "trackId": "trk_mvfqpa5q5kqfe6",
+            "assetId": null,
+            "name": "スター",
+            "color": null,
+            "startTicks": 0,
+            "durationTicks": 2400000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.5,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [
+              {
+                "id": "fx_mvfqpa5r37g7s30",
+                "type": "glow",
+                "enabled": true,
+                "params": {
+                  "strength": 0.7,
+                  "radius": 30
+                },
+                "_missing": false
+              }
+            ],
+            "keyframes": {
+              "transform.x": [
+                {
+                  "id": "kf_mvfqpa5rf3xx32",
+                  "t": 0,
+                  "v": 0.18,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r5c5nj33",
+                  "t": 480000,
+                  "v": 0.3,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r2p65t34",
+                  "t": 960000,
+                  "v": 0.22,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r8soav35",
+                  "t": 1440000,
+                  "v": 0.34,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r820sg36",
+                  "t": 1920000,
+                  "v": 0.24,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r8ekph37",
+                  "t": 2400000,
+                  "v": 0.3,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.y": [
+                {
+                  "id": "kf_mvfqpa5r2lufo38",
+                  "t": 0,
+                  "v": 0.28,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r3vsqv39",
+                  "t": 480000,
+                  "v": 0.2,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r9uzqq3a",
+                  "t": 960000,
+                  "v": 0.32,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r6d40j3b",
+                  "t": 1440000,
+                  "v": 0.24,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r6s7aj3c",
+                  "t": 1920000,
+                  "v": 0.3,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r1rxq43d",
+                  "t": 2400000,
+                  "v": 0.22,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.rotation": [
+                {
+                  "id": "kf_mvfqpa5r8op3x3e",
+                  "t": 0,
+                  "v": 0,
+                  "interp": "linear",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r43sys3f",
+                  "t": 2400000,
+                  "v": 340,
+                  "interp": "linear",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.scaleX": [
+                {
+                  "id": "kf_mvfqpa5r35gkr3g",
+                  "t": 240000,
+                  "v": 0.85,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r39d9i3h",
+                  "t": 720000,
+                  "v": 1.1,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r7kyms3i",
+                  "t": 1200000,
+                  "v": 0.9,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r8xan23j",
+                  "t": 1680000,
+                  "v": 1.15,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r1wqp93k",
+                  "t": 2160000,
+                  "v": 0.95,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.scaleY": [
+                {
+                  "id": "kf_mvfqpa5r9e2ew3l",
+                  "t": 240000,
+                  "v": 0.85,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r1sx8x3m",
+                  "t": 720000,
+                  "v": 1.1,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r1j01r3n",
+                  "t": 1200000,
+                  "v": 0.9,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r18u8i3o",
+                  "t": 1680000,
+                  "v": 1.15,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5rvxr03p",
+                  "t": 2160000,
+                  "v": 0.95,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ]
+            },
+            "metadata": {},
+            "shape": {
+              "kind": "star",
+              "width": 0.085,
+              "height": 0.085,
+              "radius": 0.45,
+              "fill": "#f6ad55",
+              "fillAlpha": 1,
+              "stroke": "#ffe0b0",
+              "strokeWidth": 0.0035,
+              "points": 5
+            }
+          },
+          {
+            "id": "clip_mvfqpa5r3ij4t3r",
+            "type": "shape",
+            "trackId": "trk_mvfqpa5q5kqfe6",
+            "assetId": null,
+            "name": "ピル",
+            "color": null,
+            "startTicks": 600000,
+            "durationTicks": 1200000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.5,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [
+              {
+                "id": "fx_mvfqpa5r55ph63q",
+                "type": "dropShadow",
+                "enabled": true,
+                "params": {
+                  "x": 0,
+                  "y": 6,
+                  "blur": 18,
+                  "color": "#34d3c0",
+                  "alpha": 0.45
+                },
+                "_missing": false
+              }
+            ],
+            "keyframes": {
+              "transform.x": [
+                {
+                  "id": "kf_mvfqpa5r2pqzm3s",
+                  "t": 0,
+                  "v": 0.68,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r8oyco3t",
+                  "t": 600000,
+                  "v": 0.62,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r1uzsz3u",
+                  "t": 1200000,
+                  "v": 0.7,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.y": [
+                {
+                  "id": "kf_mvfqpa5r5ep3v",
+                  "t": 0,
+                  "v": 0.62,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r6oveg3w",
+                  "t": 600000,
+                  "v": 0.58,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r3lqgh3x",
+                  "t": 1200000,
+                  "v": 0.64,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.rotation": [
+                {
+                  "id": "kf_mvfqpa5r32pzx3y",
+                  "t": 0,
+                  "v": -8,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r34hra3z",
+                  "t": 1200000,
+                  "v": 8,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "opacity": [
+                {
+                  "id": "kf_mvfqpa5r6pn7o40",
+                  "t": 0,
+                  "v": 0,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r2z5k741",
+                  "t": 120000,
+                  "v": 1,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r13cnd42",
+                  "t": 1080000,
+                  "v": 1,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r4hh2n43",
+                  "t": 1200000,
+                  "v": 0,
+                  "interp": "easeIn",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ]
+            },
+            "metadata": {},
+            "shape": {
+              "kind": "rect",
+              "width": 0.16,
+              "height": 0.06,
+              "radius": 0.5,
+              "fill": "#34d3c0",
+              "fillAlpha": 0.85,
+              "stroke": "#000000",
+              "strokeWidth": 0,
+              "points": 5
+            }
+          }
+        ],
+        "locked": false,
+        "hidden": false,
+        "muted": false,
+        "solo": false,
+        "height": 84,
+        "volume": 1,
+        "opacity": 1,
+        "blendMode": "source-over",
+        "color": null
+      },
+      {
+        "id": "trk_mvfqpa5qzgdj7",
+        "kind": "video",
+        "name": "タイトル",
+        "clips": [
+          {
+            "id": "clip_mvfqpa5r7m96q44",
+            "type": "text",
+            "trackId": "trk_mvfqpa5qzgdj7",
+            "assetId": null,
+            "name": "Qelvoryn",
+            "color": null,
+            "startTicks": 42000,
+            "durationTicks": 588000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.42,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [],
+            "keyframes": {
+              "opacity": [
+                {
+                  "id": "kf_mvfqpa5r6f1oh45",
+                  "t": 0,
+                  "v": 0,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r2uhs46",
+                  "t": 72000,
+                  "v": 1,
+                  "interp": "easeOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r1t1b447",
+                  "t": 522000,
+                  "v": 1,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r26gc348",
+                  "t": 588000,
+                  "v": 0,
+                  "interp": "easeIn",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.scaleX": [
+                {
+                  "id": "kf_mvfqpa5rwt7849",
+                  "t": 0,
+                  "v": 0.94,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r7bf3y4a",
+                  "t": 108000,
+                  "v": 1,
+                  "interp": "easeOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.scaleY": [
+                {
+                  "id": "kf_mvfqpa5r1s55u4b",
+                  "t": 0,
+                  "v": 0.94,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r4xqx54c",
+                  "t": 108000,
+                  "v": 1,
+                  "interp": "easeOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ]
+            },
+            "metadata": {},
+            "text": {
+              "content": "Qelvoryn",
+              "fontFamily": "Noto Sans JP, sans-serif",
+              "fontSize": 0.17,
+              "fontWeight": 800,
+              "italic": false,
+              "color": "#ffffff",
+              "align": "center",
+              "valign": "middle",
+              "lineHeight": 1.25,
+              "letterSpacing": 0,
+              "strokeColor": "#06231f",
+              "strokeWidth": 0,
+              "background": {
+                "enabled": false,
+                "color": "#000000",
+                "alpha": 0.6,
+                "padding": 0.4,
+                "radius": 0.15
+              },
+              "shadow": {
+                "enabled": true,
+                "x": 0,
+                "y": 6,
+                "blur": 24,
+                "color": "#000000",
+                "alpha": 0.55
+              },
+              "maxWidth": 0.9
+            }
+          },
+          {
+            "id": "clip_mvfqpa5r6a5dx4d",
+            "type": "text",
+            "trackId": "trk_mvfqpa5qzgdj7",
+            "assetId": null,
+            "name": "ブラウザだけで完結する動画編集",
+            "color": null,
+            "startTicks": 120000,
+            "durationTicks": 480000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.53,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [],
+            "keyframes": {
+              "opacity": [
+                {
+                  "id": "kf_mvfqpa5r76h6y4e",
+                  "t": 0,
+                  "v": 0,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r81zk24f",
+                  "t": 84000,
+                  "v": 1,
+                  "interp": "easeOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r70yiw4g",
+                  "t": 432000,
+                  "v": 1,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r6vg84h",
+                  "t": 480000,
+                  "v": 0,
+                  "interp": "easeIn",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ]
+            },
+            "metadata": {},
+            "text": {
+              "content": "ブラウザだけで完結する動画編集",
+              "fontFamily": "Noto Sans JP, sans-serif",
+              "fontSize": 0.045,
+              "fontWeight": 600,
+              "italic": false,
+              "color": "#9fb3c8",
+              "align": "center",
+              "valign": "middle",
+              "lineHeight": 1.25,
+              "letterSpacing": 0,
+              "strokeColor": "#06231f",
+              "strokeWidth": 0,
+              "background": {
+                "enabled": false,
+                "color": "#000000",
+                "alpha": 0.6,
+                "padding": 0.4,
+                "radius": 0.15
+              },
+              "shadow": {
+                "enabled": true,
+                "x": 0,
+                "y": 4,
+                "blur": 10,
+                "color": "#000000",
+                "alpha": 0.55
+              },
+              "maxWidth": 0.9
+            }
+          },
+          {
+            "id": "clip_mvfqpa5r6ai4p4i",
+            "type": "text",
+            "trackId": "trk_mvfqpa5qzgdj7",
+            "assetId": null,
+            "name": "Qelvoryn",
+            "color": null,
+            "startTicks": 1992000,
+            "durationTicks": 408000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.44,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [],
+            "keyframes": {
+              "opacity": [
+                {
+                  "id": "kf_mvfqpa5r99xxn4j",
+                  "t": 0,
+                  "v": 0,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r8xcqa4k",
+                  "t": 96000,
+                  "v": 1,
+                  "interp": "easeOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.scaleX": [
+                {
+                  "id": "kf_mvfqpa5r5354y4l",
+                  "t": 0,
+                  "v": 0.96,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r5xnx94m",
+                  "t": 120000,
+                  "v": 1,
+                  "interp": "easeOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ],
+              "transform.scaleY": [
+                {
+                  "id": "kf_mvfqpa5rvr64n",
+                  "t": 0,
+                  "v": 0.96,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r1hgtd4o",
+                  "t": 120000,
+                  "v": 1,
+                  "interp": "easeOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ]
+            },
+            "metadata": {},
+            "text": {
+              "content": "Qelvoryn",
+              "fontFamily": "Noto Sans JP, sans-serif",
+              "fontSize": 0.11,
+              "fontWeight": 800,
+              "italic": false,
+              "color": "#ffffff",
+              "align": "center",
+              "valign": "middle",
+              "lineHeight": 1.25,
+              "letterSpacing": 0,
+              "strokeColor": "#06231f",
+              "strokeWidth": 0,
+              "background": {
+                "enabled": false,
+                "color": "#000000",
+                "alpha": 0.6,
+                "padding": 0.4,
+                "radius": 0.15
+              },
+              "shadow": {
+                "enabled": true,
+                "x": 0,
+                "y": 4,
+                "blur": 18,
+                "color": "#000000",
+                "alpha": 0.55
+              },
+              "maxWidth": 0.9
+            }
+          },
+          {
+            "id": "clip_mvfqpa5r5hza04p",
+            "type": "text",
+            "trackId": "trk_mvfqpa5qzgdj7",
+            "assetId": null,
+            "name": "github.com/rinderd",
+            "color": null,
+            "startTicks": 2040000,
+            "durationTicks": 360000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.545,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [],
+            "keyframes": {
+              "opacity": [
+                {
+                  "id": "kf_mvfqpa5rrplf4q",
+                  "t": 0,
+                  "v": 0,
+                  "interp": "easeInOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                },
+                {
+                  "id": "kf_mvfqpa5r1t1q14r",
+                  "t": 108000,
+                  "v": 1,
+                  "interp": "easeOut",
+                  "bezier": [
+                    0.33,
+                    0,
+                    0.67,
+                    1
+                  ]
+                }
+              ]
+            },
+            "metadata": {},
+            "text": {
+              "content": "github.com/rinderdragon0823/Qelvoryn",
+              "fontFamily": "Noto Sans JP, sans-serif",
+              "fontSize": 0.032,
+              "fontWeight": 500,
+              "italic": false,
+              "color": "#8fa3b8",
+              "align": "center",
+              "valign": "middle",
+              "lineHeight": 1.25,
+              "letterSpacing": 0,
+              "strokeColor": "#06231f",
+              "strokeWidth": 0,
+              "background": {
+                "enabled": false,
+                "color": "#000000",
+                "alpha": 0.6,
+                "padding": 0.4,
+                "radius": 0.15
+              },
+              "shadow": {
+                "enabled": true,
+                "x": 0,
+                "y": 0,
+                "blur": 0,
+                "color": "#000000",
+                "alpha": 0.55
+              },
+              "maxWidth": 0.9
+            }
+          }
+        ],
+        "locked": false,
+        "hidden": false,
+        "muted": false,
+        "solo": false,
+        "height": 84,
+        "volume": 1,
+        "opacity": 1,
+        "blendMode": "source-over",
+        "color": null
+      },
+      {
+        "id": "trk_mvfqpa5q42jzl8",
+        "kind": "video",
+        "name": "背景",
+        "clips": [
+          {
+            "id": "clip_mvfqpa5q45ef79",
+            "type": "shape",
+            "trackId": "trk_mvfqpa5q42jzl8",
+            "assetId": null,
+            "name": "背景",
+            "color": null,
+            "startTicks": 0,
+            "durationTicks": 2400000,
+            "inTicks": 0,
+            "speed": 1,
+            "reversed": false,
+            "enabled": true,
+            "locked": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "transform": {
+              "x": 0.5,
+              "y": 0.5,
+              "scaleX": 1,
+              "scaleY": 1,
+              "rotation": 0,
+              "anchorX": 0.5,
+              "anchorY": 0.5
+            },
+            "crop": {
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "bottom": 0
+            },
+            "mask": {
+              "enabled": false,
+              "type": "rect",
+              "x": 0.5,
+              "y": 0.5,
+              "w": 0.5,
+              "h": 0.5,
+              "feather": 0.03,
+              "round": 0,
+              "invert": false
+            },
+            "fit": "contain",
+            "volume": 1,
+            "fades": {
+              "inTicks": 0,
+              "outTicks": 0
+            },
+            "effects": [],
+            "keyframes": {},
+            "metadata": {},
+            "shape": {
+              "kind": "rect",
+              "width": 1.02,
+              "height": 1.02,
+              "radius": 0.2,
+              "fill": "#0b1020",
+              "fillAlpha": 1,
+              "stroke": "#000000",
+              "strokeWidth": 0,
+              "points": 5
+            }
+          }
+        ],
+        "locked": false,
+        "hidden": false,
+        "muted": false,
+        "solo": false,
+        "height": 84,
+        "volume": 1,
+        "opacity": 1,
+        "blendMode": "source-over",
+        "color": null
+      }
+    ],
+    "markers": [
+      {
+        "id": "mk_mvfqpa5t9gemr5p",
+        "tick": 48000,
+        "name": "タイトル",
+        "color": "#f6ad55"
+      },
+      {
+        "id": "mk_mvfqpa5t66hbe5q",
+        "tick": 576000,
+        "name": "図形アニメーション",
+        "color": "#f6ad55"
+      },
+      {
+        "id": "mk_mvfqpa5t7wqc85r",
+        "tick": 1164000,
+        "name": "字幕",
+        "color": "#f6ad55"
+      },
+      {
+        "id": "mk_mvfqpa5t673ca5s",
+        "tick": 1488000,
+        "name": "カメラズーム",
+        "color": "#f6ad55"
+      },
+      {
+        "id": "mk_mvfqpa5t87cgs5t",
+        "tick": 1992000,
+        "name": "エンドカード",
+        "color": "#f6ad55"
+      }
+    ]
+  }
+}

@@ -1017,6 +1017,28 @@ export class QelvorynApp {
     }
   }
 
+  /** Load the bundled demo project (demo/demo.qelvoryn.json). */
+  async loadDemo() {
+    try {
+      const res = await fetch('demo/demo.qelvoryn.json', { cache: 'no-cache' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const payload = await res.json();
+      const project = payload.project || payload;
+      this.playback.stop({ silent: true });
+      this.store.load(project, { label: 'デモを開く' });
+      this.session.selection = [];
+      this.session.playheadTicks = 0;
+      this.session.selectedTrackId = project.tracks[0]?.id || null;
+      await this.persistence.saveNow().catch(() => {});
+      this.refreshAll();
+      this.preview.requestRender({ force: true });
+      this.timeline.zoomToFit();
+      this.setStatus('デモプロジェクトを読み込みました。Space で再生できます。', 'ok');
+    } catch (err) {
+      this.toast(`デモを読み込めません: ${err?.message || err}`, 'error');
+    }
+  }
+
   async openProjectFile(file) {
     const { project, missingAssets } = await this.persistence.parseProjectFile(file);
     const doLoad = async () => {
