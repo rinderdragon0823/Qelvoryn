@@ -255,7 +255,7 @@ function buildProject() {
   titles.clips.push(url);
 
   // ---- subtitles ----------------------------------------------------------
-  subtitles.clips.push(subtitle('YMM4 方式のレイヤー編集', 2.1, 5.5));
+  subtitles.clips.push(subtitle('動画も音声も同じレイヤー', 2.1, 5.5));
   subtitles.clips.push(subtitle('キーフレームで自由にアニメーション', 5.9, 9.3));
   subtitles.clips.push(subtitle('字幕もワンクリックで追加', 9.7, 12.9));
   subtitles.clips.push(subtitle('カメラズームで自動演出', 13.3, 16.4));

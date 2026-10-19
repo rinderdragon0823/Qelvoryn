@@ -777,8 +777,8 @@ export class QelvorynApp {
   }
 
   /**
-   * Add a new editing layer above the stack (YMM4-style: layers hold any
-   * clip type, there is no video/audio track split).
+   * Add a new editing layer above the stack (layers hold any clip type;
+   * there is no video/audio track split).
    */
   addLayer(nearIndex = -1) {
     const tracks = this.store.state.tracks;
@@ -788,7 +788,7 @@ export class QelvorynApp {
   }
 
   /**
-   * Drop an asset on the timeline (Premiere/YMM4 style):
+   * Drop an asset on the timeline (layer spill):
    * the preferred lane wins when it is free, otherwise the first free
    * layer is used, and a new layer is created when everything at that
    * spot is busy.

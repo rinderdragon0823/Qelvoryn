@@ -507,7 +507,7 @@ export const TOOLS = [
   },
   {
     name: 'qelvoryn_add_layer',
-    description: 'Add a new editing layer (YMM4-style stack; any clip type fits any layer).',
+    description: 'Add a new editing layer (any clip type fits any layer).',
     inputSchema: {
       type: 'object',
       properties: {

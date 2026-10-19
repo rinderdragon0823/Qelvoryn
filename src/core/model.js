@@ -321,8 +321,8 @@ export function projectDuration(project) {
 }
 
 export function canTrackAcceptClip(track, clipType) {
-  // YMM4-style layers: every track accepts every clip type (video, audio,
-  // text, shapes and effects all live on the same layer stack).
+  // Layers are type-agnostic: every track accepts every clip type (video,
+  // audio, text, shapes and effects all live on the same layer stack).
   return Boolean(track) && Boolean(TRACK_KINDS[track.kind]);
 }
 
