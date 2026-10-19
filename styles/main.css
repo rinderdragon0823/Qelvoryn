@@ -409,21 +409,36 @@ button {
 .preview-stage {
   flex: 1 1 auto;
   min-height: 0;
+  position: relative;
   display: grid;
   place-items: center;
   padding: 10px;
   background:
-    linear-gradient(45deg, #0b0f14 25%, #0e131a 25%, #0e131a 50%, #0b0f14 50%, #0b0f14 75%, #0e131a 75%);
+  linear-gradient(45deg, #0b0f14 25%, #0e131a 25%, #0e131a 50%, #0b0f14 50%, #0b0f14 75%, #0e131a 75%);
   background-size: 24px 24px;
   overflow: hidden;
 }
 
 .preview-canvas {
-  max-width: 100%;
-  max-height: 100%;
+  display: block;
   box-shadow: 0 6px 28px rgba(0, 0, 0, 0.6);
   background: #000;
   image-rendering: auto;
+}
+
+.preview-hint {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(8, 12, 16, 0.72);
+  color: var(--text-1);
+  font-size: 10px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
 }
 
 .preview-hud {
@@ -447,7 +462,9 @@ button {
   background: var(--bg-2);
   border-top: 1px solid var(--line);
   flex: 0 0 auto;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: thin;
 }
 
 .timecode-display {

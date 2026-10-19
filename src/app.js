@@ -81,7 +81,8 @@ export class QelvorynApp {
     const splitRight = el('div.splitter-v', { title: 'ドラッグで幅を変更' });
     const splitTimeline = el('div.splitter-h', { title: 'ドラッグで高さを変更' });
 
-    this.timeline.root.style.height = `${Math.round(window.innerHeight * 0.4)}px`;
+    this.timelineUserSized = false;
+    this.timeline.root.style.height = `${this.preferredTimelineHeight()}px`;
 
     this.upper = el('div.upper', {}, [
       this.mediaPanel.root, splitLeft, this.preview.root, splitRight, this.inspector.root,
@@ -92,6 +93,20 @@ export class QelvorynApp {
     this.setupSplitter(splitLeft, this.mediaPanel.root, { min: 170, max: 460 });
     this.setupSplitter(splitRight, this.inspector.root, { min: 240, max: 620, invert: true });
     this.setupHeightSplitter(splitTimeline, this.timeline.root);
+    window.addEventListener('resize', () => {
+      if (!this.timelineUserSized) {
+        this.timeline.root.style.height = `${this.preferredTimelineHeight()}px`;
+        this.timeline.renderRuler();
+      }
+      this.preview.resize();
+    });
+  }
+
+  /** Timeline height that always leaves room for the program monitor. */
+  preferredTimelineHeight() {
+    const desired = Math.round(window.innerHeight * 0.4);
+    const reserve = 360;
+    return Math.max(140, Math.min(desired, window.innerHeight - reserve));
   }
 
   setupSplitter(handle, panel, opts) {
@@ -132,6 +147,7 @@ export class QelvorynApp {
     handle.addEventListener('pointerdown', (ev) => {
       startY = ev.clientY;
       startHeight = panel.getBoundingClientRect().height;
+      this.timelineUserSized = true;
       handle.classList.add('dragging');
       handle.setPointerCapture(ev.pointerId);
       ev.preventDefault();

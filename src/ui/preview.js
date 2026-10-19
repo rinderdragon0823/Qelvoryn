@@ -11,6 +11,22 @@ import { el, append, icon, iconButton, button, formatNumber } from './dom.js';
 import { renderFrame, MediaFrameSource } from '../engine/compositor.js';
 import { formatTimecode, parseTimecode, ticksToFrames } from '../core/time.js';
 import { contextMenu } from './menu.js';
+import { setParamValue } from '../core/commands.js';
+
+const VISUAL_TYPES = new Set(['video', 'image', 'text', 'shape']);
+
+/** Letterboxed size of the program monitor for a container of `avail` size. */
+export function fitPreviewSize(projectWidth, projectHeight, availWidth, availHeight) {
+  const w = Math.max(16, projectWidth);
+  const h = Math.max(16, projectHeight);
+  const aw = Math.max(16, availWidth);
+  const ah = Math.max(16, availHeight);
+  const scale = Math.min(aw / w, ah / h);
+  return {
+    width: Math.max(16, Math.floor(w * scale)),
+    height: Math.max(16, Math.floor(h * scale)),
+  };
+}
 
 export class PreviewView {
   constructor(app) {
@@ -23,6 +39,10 @@ export class PreviewView {
     this.pending = null;
     this.lastFrameDrawn = 0;
     this.source = new MediaFrameSource(app.mediaPool, { exact: true });
+    this.displayW = 16;
+    this.displayH = 9;
+    this.drag = null;
+    this.wheel = null;
     this.build();
   }
 
@@ -31,7 +51,8 @@ export class PreviewView {
     this.canvas = el('canvas.preview-canvas');
     this.ctx = this.canvas.getContext('2d');
     this.hud = el('div.preview-hud', { text: 'プレビュー' });
-    this.stage = el('div.preview-stage', {}, [this.canvas, this.hud]);
+    this.hint = el('div.preview-hint', { text: 'ドラッグ: 位置 / ホイール: サイズ' });
+    this.stage = el('div.preview-stage', {}, [this.canvas, this.hud, this.hint]);
 
     const header = el('div.panel-header', {}, [
       el('span', { text: 'プログラムモニター' }),
@@ -94,6 +115,13 @@ export class PreviewView {
         { label: 'プレビュー品質: 1/4', action: () => { this.qualitySelect.value = '0.25'; this.qualitySelect.dispatchEvent(new Event('change')); } },
       ]);
     });
+
+    this.initDirectManipulation();
+    if (typeof ResizeObserver !== 'undefined') {
+      this.resizeObserver = new ResizeObserver(() => this.fitStage());
+      this.resizeObserver.observe(this.stage);
+    }
+    requestAnimationFrame(() => this.fitStage());
   }
 
   buildTimecode() {
@@ -145,7 +173,184 @@ export class PreviewView {
     }
     const res = document.getElementById('preview-res');
     if (res) res.textContent = `${project.settings.width}×${project.settings.height} ${formatNumber(project.settings.fps, 3)}fps`;
+    this.fitStage();
+    this.updateCursor();
     this.updateTimecode();
+  }
+
+  /** Fit the canvas into the stage (letterboxed, never clipped). */
+  fitStage() {
+    const project = this.store.state;
+    const pad = 10;
+    const availW = this.stage.clientWidth - pad * 2;
+    const availH = this.stage.clientHeight - pad * 2;
+    if (availW < 8 || availH < 8) return;
+    const { width, height } = fitPreviewSize(
+      project.settings.width,
+      project.settings.height,
+      availW,
+      availH,
+    );
+    this.displayW = width;
+    this.displayH = height;
+    this.canvas.style.width = `${width}px`;
+    this.canvas.style.height = `${height}px`;
+  }
+
+  visualSelection() {
+    const out = [];
+    for (const id of this.session.selection || []) {
+      const found = this.store.findClip(id);
+      if (!found || found.clip.locked) continue;
+      if (!VISUAL_TYPES.has(found.clip.type)) continue;
+      out.push(found);
+    }
+    return out;
+  }
+
+  updateCursor() {
+    const has = this.visualSelection().length > 0;
+    if (!this.drag) this.canvas.style.cursor = has ? 'move' : 'default';
+    this.hint.style.opacity = has ? '1' : '0';
+  }
+
+  initDirectManipulation() {
+    this.canvas.addEventListener('pointerdown', (ev) => this.onMonitorPointerDown(ev));
+    this.canvas.addEventListener('pointerenter', () => this.updateCursor());
+    this.canvas.addEventListener('pointermove', () => this.updateCursor());
+    this.canvas.addEventListener('pointerleave', () => {
+      if (this.drag) return;
+      this.canvas.style.cursor = 'default';
+      this.hint.style.opacity = '0';
+    });
+    this.canvas.addEventListener('wheel', (ev) => this.onMonitorWheel(ev), { passive: false });
+  }
+
+  onMonitorPointerDown(ev) {
+    if (ev.button !== 0) return;
+    if (this.app.playback.playing) return;
+    const entries = this.visualSelection();
+    if (!entries.length) return;
+    ev.preventDefault();
+    this.commitWheel();
+    this.drag = {
+      pointerId: ev.pointerId,
+      startX: ev.clientX,
+      startY: ev.clientY,
+      moved: false,
+      tx: null,
+      entries: entries.map((e) => ({ clipId: e.clip.id, x: e.clip.transform.x, y: e.clip.transform.y })),
+    };
+    try {
+      this.canvas.setPointerCapture(ev.pointerId);
+    } catch {
+      /* synthetic pointers cannot be captured */
+    }
+    this.canvas.style.cursor = 'grabbing';
+    const onMove = (event) => this.onMonitorPointerMove(event);
+    const onUp = (event) => this.onMonitorPointerEnd(event);
+    this.drag.cleanup = () => {
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onUp);
+      window.removeEventListener('pointercancel', onUp);
+    };
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onUp);
+    window.addEventListener('pointercancel', onUp);
+  }
+
+  onMonitorPointerMove(ev) {
+    const drag = this.drag;
+    if (!drag || ev.pointerId !== drag.pointerId) return;
+    const dxPx = ev.clientX - drag.startX;
+    const dyPx = ev.clientY - drag.startY;
+    if (!drag.moved && Math.abs(dxPx) < 2 && Math.abs(dyPx) < 2) return;
+    if (!drag.moved) {
+      drag.moved = true;
+      drag.tx = this.store.begin('クリップを移動 (モニター)', { interactive: true });
+      drag.tx.touch(['tracks']);
+    }
+    const dx = dxPx / Math.max(1, this.displayW);
+    const dy = dyPx / Math.max(1, this.displayH);
+    const clamp = (v) => Math.max(-2, Math.min(3, v));
+    const snap = (v) => Math.round(v * 10000) / 10000;
+    for (const entry of drag.entries) {
+      setParamValue(this.store, [entry.clipId], 'transform.x', snap(clamp(entry.x + dx)), {
+        playheadTicks: this.session.playheadTicks,
+        label: '位置を変更',
+      });
+      setParamValue(this.store, [entry.clipId], 'transform.y', snap(clamp(entry.y + dy)), {
+        playheadTicks: this.session.playheadTicks,
+        label: '位置を変更',
+      });
+    }
+    this.app.requestRender();
+  }
+
+  onMonitorPointerEnd(ev) {
+    const drag = this.drag;
+    if (!drag || (ev.pointerId != null && ev.pointerId !== drag.pointerId)) return;
+    this.drag = null;
+    drag.cleanup?.();
+    try {
+      this.canvas.releasePointerCapture?.(ev.pointerId);
+    } catch {
+      /* ignore */
+    }
+    this.canvas.style.cursor = this.visualSelection().length ? 'move' : 'default';
+    if (drag.tx) {
+      const changed = this.store.commit();
+      if (changed) this.app.onProjectChanged({ kind: 'edit', label: 'クリップを移動' });
+      else this.app.requestRender();
+    }
+  }
+
+  onMonitorWheel(ev) {
+    if (this.app.playback.playing || this.drag) return;
+    const entries = this.visualSelection();
+    if (!entries.length) return;
+    ev.preventDefault();
+    const key = entries.map((e) => e.clip.id).join('|');
+    if (this.wheel && this.wheel.key !== key) this.commitWheel();
+    if (!this.wheel) {
+      this.wheel = {
+        key,
+        tx: this.store.begin('クリップを拡大縮小 (モニター)', { interactive: true }),
+        factor: 1,
+        timer: 0,
+        entries: entries.map((e) => ({
+          clipId: e.clip.id,
+          scaleX: e.clip.transform.scaleX || 1,
+          scaleY: e.clip.transform.scaleY || 1,
+        })),
+      };
+      this.wheel.tx.touch(['tracks']);
+    }
+    this.wheel.factor *= Math.pow(1.0015, -ev.deltaY);
+    this.wheel.factor = Math.max(0.02, Math.min(80, this.wheel.factor));
+    const clamp = (v) => Math.max(0.01, Math.min(8, v));
+    for (const entry of this.wheel.entries) {
+      setParamValue(this.store, [entry.clipId], 'transform.scaleX', clamp(entry.scaleX * this.wheel.factor), {
+        playheadTicks: this.session.playheadTicks,
+        label: 'サイズを変更',
+      });
+      setParamValue(this.store, [entry.clipId], 'transform.scaleY', clamp(entry.scaleY * this.wheel.factor), {
+        playheadTicks: this.session.playheadTicks,
+        label: 'サイズを変更',
+      });
+    }
+    this.app.requestRender();
+    clearTimeout(this.wheel.timer);
+    this.wheel.timer = setTimeout(() => this.commitWheel(), 350);
+  }
+
+  commitWheel() {
+    const wheel = this.wheel;
+    if (!wheel) return;
+    this.wheel = null;
+    clearTimeout(wheel.timer);
+    const changed = this.store.commit();
+    if (changed) this.app.onProjectChanged({ kind: 'edit', label: 'クリップを拡大縮小' });
   }
 
   updateTimecode() {

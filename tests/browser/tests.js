@@ -479,6 +479,68 @@ test('append は {node} オブジェクトや非 Node 値でもアプリを壊�
   assert(host.textContent.includes('text'), '文字列はテキストノードになる');
 });
 
+test('プログラムモニターはステージに収まり、ドラッグ/ホイールで編集できる', async () => {
+  const { PreviewView } = await import('../../src/ui/preview.js');
+  const track = createTrack('video', { name: 'V1' });
+  const store = makeStore({ tracks: [track] });
+  const clip = redEllipseClip({});
+  insertClip(store, track.id, clip, { resolveOverlap: false });
+
+  const session = { selection: [clip.id], playheadTicks: 0, previewScale: 1 };
+  const changes = [];
+  const app = {
+    store,
+    session,
+    mediaPool: new MediaPool(store),
+    playback: { isPlaying: false, playing: false, setVolume() {} },
+    projectDuration: () => projectDuration(store.state),
+    requestRender() {},
+    onProjectChanged: (entry) => changes.push(entry),
+    togglePlay() {},
+    setPlayhead() {},
+    stepFrames() {},
+    showProjectSettings() {},
+    exportStill() {},
+  };
+  const view = new PreviewView(app);
+  view.root.style.width = '520px';
+  view.root.style.height = '320px';
+  document.body.appendChild(view.root);
+  await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  await new Promise((resolve) => setTimeout(resolve, 60));
+
+  const stageRect = view.stage.getBoundingClientRect();
+  const canvasRect = view.canvas.getBoundingClientRect();
+  assert(stageRect.width > 100 && stageRect.height > 60, `stage has a usable size (${stageRect.width}x${stageRect.height})`);
+  assert(canvasRect.width <= stageRect.width - 19, `canvas fits horizontally (${canvasRect.width} <= ${stageRect.width})`);
+  assert(canvasRect.height <= stageRect.height - 19, `canvas fits vertically (${canvasRect.height} <= ${stageRect.height})`);
+  assert(Math.abs(canvasRect.width / canvasRect.height - 16 / 9) < 0.03, 'preview keeps the project aspect ratio');
+
+  // deterministic pointer math (as if the canvas were 320x180 on screen)
+  view.displayW = 320;
+  view.displayH = 180;
+  const pointer = (type, target, x, y) => target.dispatchEvent(new PointerEvent(type, {
+    bubbles: true, cancelable: true, pointerId: 7, button: 0, clientX: x, clientY: y,
+  }));
+  pointer('pointerdown', view.canvas, 100, 100);
+  pointer('pointermove', window, 132, 118);
+  pointer('pointerup', window, 132, 118);
+  let transform = store.findClip(clip.id).clip.transform;
+  assert(Math.abs(transform.x - 0.6) < 0.002, `drag moved x to 0.6 (got ${transform.x})`);
+  assert(Math.abs(transform.y - 0.6) < 0.002, `drag moved y to 0.6 (got ${transform.y})`);
+  assert(store.undoStack.length >= 1, 'the drag is one undo step');
+
+  view.canvas.dispatchEvent(new WheelEvent('wheel', { bubbles: true, cancelable: true, deltaY: -120 }));
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  transform = store.findClip(clip.id).clip.transform;
+  assert(transform.scaleX > 1.1 && transform.scaleX < 1.3, `wheel grew the clip (got ${transform.scaleX})`);
+  assert(Math.abs(transform.scaleY - transform.scaleX) < 0.001, 'uniform scaling keeps x/y equal');
+  assert(changes.length >= 2, 'drag and wheel each commit an edit');
+  assert(store.undoStack.length >= 2, 'the wheel burst is one undo step');
+
+  view.root.remove();
+});
+
 test('インスペクタが全タブで例外なく描画される (トラック/クリップ選択)', async () => {
   const { Inspector } = await import('../../src/ui/inspector.js');
   const track = createTrack('video', { name: 'V1' });
